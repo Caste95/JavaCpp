@@ -69,13 +69,13 @@ public class AlgorithmView {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in c fatta
-        String sql = "select " + oh.TIMEC +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
+        String sql = "select " + DBOpenHelper.TIMEC +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
                 " and " + BaseColumns._ID + " = (" +
                 " select max(" + BaseColumns._ID + ")" +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() + " );";
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() + " );";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null) {
             int n = cursor.getCount();
@@ -98,13 +98,13 @@ public class AlgorithmView {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in java fatta
-        String sql = "select " + oh.TIMEJAVA +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
+        String sql = "select " + DBOpenHelper.TIMEJAVA +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
                 " and " + BaseColumns._ID + " = (" +
                 " select max(" + BaseColumns._ID + ")" +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() + " );";
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() + " );";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null) {
             int n = cursor.getCount();
@@ -135,13 +135,13 @@ public class AlgorithmView {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultimo input usato
-        String sql = "select " + oh.INPUT +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
+        String sql = "select " + DBOpenHelper.INPUT +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
                 " and " + BaseColumns._ID + " = (" +
                 " select max(" + BaseColumns._ID + ")" +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() + " );";
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() + " );";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null) {
             int n = cursor.getCount();
@@ -171,11 +171,11 @@ public class AlgorithmView {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         ContentValues v = new ContentValues();
-        v.put(oh.ALG, this.id);
-        v.put(oh.INPUT, input);
-        v.put(oh.TIMEC, tc);
-        v.put(oh.TIMEJAVA, tj);
-        db.insert(oh.TABLE, null, v);
+        v.put(DBOpenHelper.ALG, this.id);
+        v.put(DBOpenHelper.INPUT, input);
+        v.put(DBOpenHelper.TIMEC, tc);
+        v.put(DBOpenHelper.TIMEJAVA, tj);
+        db.insert(DBOpenHelper.TABLE, null, v);
         oh.close();
     }
 
@@ -185,10 +185,10 @@ public class AlgorithmView {
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati per fare il grafico
         //per gli stessi imput faro la media
-        String sql = "select " + oh.INPUT + ", avg(" + oh.TIMEC + ") " +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
-                " group by " + oh.INPUT + ";";
+        String sql = "select " + DBOpenHelper.INPUT + ", avg(" + DBOpenHelper.TIMEC + ") " +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
+                " group by " + DBOpenHelper.INPUT + ";";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null){
             int n = cursor.getCount();
@@ -218,10 +218,10 @@ public class AlgorithmView {
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati per fare il grafico
         //per gli stessi imput faro la media
-        String sql = "select " + oh.INPUT + ", avg(" + oh.TIMEJAVA + ") " +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
-                " group by " + oh.INPUT + ";";
+        String sql = "select " + DBOpenHelper.INPUT + ", avg(" + DBOpenHelper.TIMEJAVA + ") " +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
+                " group by " + DBOpenHelper.INPUT + ";";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null){
             int n = cursor.getCount();
@@ -251,10 +251,10 @@ public class AlgorithmView {
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati per fare il grafico
         //per gli stessi imput faro la media
-        String sql = "select " + oh.INPUT + ", avg(" + oh.TIMEJAVA + ") " + ", avg(" + oh.TIMEC + ")" +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
-                " group by " + oh.INPUT + ";";
+        String sql = "select " + DBOpenHelper.INPUT + ", avg(" + DBOpenHelper.TIMEJAVA + ") " + ", avg(" + DBOpenHelper.TIMEC + ")" +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
+                " group by " + DBOpenHelper.INPUT + ";";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null){
             n = cursor.getCount();
@@ -274,10 +274,10 @@ public class AlgorithmView {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati con quello specifico input per quell'algoritmo
-        String sql = "select " + oh.INPUT + ", " + oh.TIMEC  + ", " + oh.TIMEJAVA +
-                " from " + oh.TABLE +
-                " where " + oh.ALG + " = " + getId() +
-                " and " + oh.INPUT + " = " + input + ";";
+        String sql = "select " + DBOpenHelper.INPUT + ", " + DBOpenHelper.TIMEC + ", " + DBOpenHelper.TIMEJAVA +
+                " from " + DBOpenHelper.TABLE +
+                " where " + DBOpenHelper.ALG + " = " + getId() +
+                " and " + DBOpenHelper.INPUT + " = " + input + ";";
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor != null){
             n = cursor.getCount(); //impossibile che n sia = 0

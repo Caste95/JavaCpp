@@ -21,16 +21,16 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         //devo fare un arrraylist e riempirla
-        ArrayList<AlgorithmView> arr = new ArrayList<AlgorithmView>();
+        ArrayList<AlgorithmView> arr = new ArrayList<>();
         for(int i = 0; i < AlgorithmView.list.length; i++){
             arr.add(AlgorithmView.list[i]);
         }
 
         //ora devo inizializzare una mappa chiave valore per poter mettere i valore nella lista con il simple adapter
-        ArrayList<HashMap<String, Object>> dati = new ArrayList<HashMap<String,Object>>();
+        ArrayList<HashMap<String, Object>> dati = new ArrayList<>();
         for(int i = 0; i < arr.size(); i++){
             AlgorithmView a = arr.get(i);
-            HashMap<String,Object> map = new HashMap<String, Object>(); //creiamo una mappa di valori
+            HashMap<String,Object> map = new HashMap<>(); //creiamo una mappa di valori
             map.put("nome", getString(a.getNome()));       //prendo il nome del algoritmo
             map.put("tipo", getString(a.getTipo()));       //prendo il tipo dell algoritmo
             map.put("c", a.getEsec(this));                 //prendo il tempo di esecuzione in linguaggio c
