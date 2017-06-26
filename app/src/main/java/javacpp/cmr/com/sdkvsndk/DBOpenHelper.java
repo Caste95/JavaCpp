@@ -17,16 +17,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-public class DBOpenHelper extends SQLiteOpenHelper {
+class DBOpenHelper extends SQLiteOpenHelper {
 
     //variabili del db
     private static final String DB_NAME = "javavsccpp";
     private static final int DB_VERSION = 1;
-    public static final String TABLE = "algorithm";
-    public static final String ALG = "id_alg";
-    public static final String INPUT = "input";
-    public static final String TIMEC = "c";
-    public static final String TIMEJAVA = "java";
+    static final String TABLE = "algorithm";
+    static final String ALG = "id_alg";
+    static final String INPUT = "input";
+    static final String TIMEC = "c";
+    static final String TIMEJAVA = "java";
 
     //costruttore
     DBOpenHelper(Context context){

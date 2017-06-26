@@ -24,10 +24,10 @@ public class AlgorithmView {
     private static int id_counter = 0;
 
     //variabili
-    private int id;
-    private int nome;
-    private int tipo;
-    private int desc;
+    private final int id;
+    private final int nome;
+    private final int tipo;
+    private final int desc;
     private int input = 0; //ultimo input dato
     private long esec = 0; //ultimo tempo esecuzione cpp
     private long esej = 0; //ultimo tempo esecuzione java
@@ -50,7 +50,7 @@ public class AlgorithmView {
     }
 
     //metodi
-    public int getId() {
+    private int getId() {
         return id;
     }
 
@@ -151,14 +151,6 @@ public class AlgorithmView {
             oh.close();
         }
         return input;
-    }
-
-    public void setDesc(int desc) {
-        this.desc = desc;
-    }
-
-    public void setInput(int input) {
-        this.input = input;
     }
 
     //funzione per l'aggiornamento dei dati nel db
@@ -290,7 +282,7 @@ public class AlgorithmView {
     }
 
     //prova
-    public static AlgorithmView[] list = new AlgorithmView[]{
+    public static final AlgorithmView[] list = new AlgorithmView[]{
             new AlgorithmView(R.string.fib, R.string.cpu, R.string.fibd),
             new AlgorithmView(R.string.mat, R.string.memory, R.string.matd),
             new AlgorithmView(R.string.prim, R.string.cpu, R.string.primd),

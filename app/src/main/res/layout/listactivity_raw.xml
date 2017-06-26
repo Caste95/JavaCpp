@@ -33,7 +33,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="9sp"
             android:layout_weight="2"
-            android:gravity="top|right"
+            android:gravity="end"
             tools:ignore="SmallSp">
 
         </TextView>
