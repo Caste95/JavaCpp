@@ -54,19 +54,22 @@
             android:id="@+id/buttonGo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonGo" />
+            android:text="@string/buttonGo"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/buttonStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonStop" />
+            android:text="@string/buttonStop"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/buttonPlot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonPlot" />
+            android:text="@string/buttonPlot"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
