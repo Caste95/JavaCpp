@@ -5,11 +5,11 @@ package javacpp.cmr.com.sdkvsndk;
     * Mi crea il db
     * Me lo aggiorna (non credo ci sarannno nuovo versioni)
     * Il db è molto semplice abbiamo solamente una tabella strutturata in:
-    *   id autoincrementante
-    *   id_alg l'id dell'algoritmo che è la posizione nella lista
-    *   input input che è stato usato
-    *   timec tempo di esecuzione algoritmo in c
-    *   timejava tempo di esecuzione algoritmo in java
+    *   id: intero autoincrementante
+    *   id_alg: l'id dell'algoritmo che è la posizione nella lista
+    *   input: input che è stato usato
+    *   timec: tempo di esecuzione algoritmo in c
+    *   timejava: tempo di esecuzione algoritmo in java
  */
 
 import android.content.Context;

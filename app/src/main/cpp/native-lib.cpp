@@ -2,6 +2,21 @@
 #include <string>
 #include <stdlib.h>
 
+//variabile per stoppare l'algoritmo nell asynctask
+bool flag = false;
+
+//metodi per accedere alla viariabile booleana
+void Java_javacpp_cmr_com_sdkvsndk_MainActivity_cancella(JNIEnv *env, jobject obj) {
+    flag = true;
+}
+
+jboolean Java_javacpp_cmr_com_sdkvsndk_MainActivity_visualizza(JNIEnv *env, jobject obj) {
+    return (jboolean ) flag;
+}
+
+void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) {
+    flag = false;
+}
 
 /*Generazione di sequenze di numeri casuali
 * usero il linear conguential generetor come algoritmo che e' semplice ed efficace
@@ -13,11 +28,9 @@
 * useremo come seme il tempo con current time millis e sara sempre il
 * primo elemento della lista
 */
-bool flag = false;
-
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_Random(JNIEnv* env, jobject, jlong n){
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv* env, jobject, jlong n){
     unsigned long long m = 4294967296L; // = 2^32
     unsigned long long a = 432274426543147L; //numero primo a 15 cifre
     unsigned int c = 42430867; // un altro numero primo molto grande a 8 cifre
@@ -45,7 +58,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_Random(JNIEnv* env, jobject, jlong n)
 */
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_NestedLoops(JNIEnv* env, jobject, jint n){
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv* env, jobject, jint n){
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
@@ -57,7 +70,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_NestedLoops(JNIEnv* env, jobject, jin
                 for(l = 0; l < n; l++){
                     for(r = 0; r < n; r++){
                         for(p = 0; p < n; p++){
-                            //non faccio niente
+                            //non faccio niente verifico solo il flag
                             if(flag) return -1;
                         }
                     }
@@ -72,19 +85,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_NestedLoops(JNIEnv* env, jobject, jin
     return (jlong) t;
 }
 
-void Java_javacpp_cmr_com_sdkvsndk_MainActivity_cancella(JNIEnv *env, jobject obj) {
-    flag = true;
-}
-
-
-jboolean Java_javacpp_cmr_com_sdkvsndk_MainActivity_visualizza(JNIEnv *env, jobject obj) {
-    return flag;
-}
-
-void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) {
-    flag = false;
-}
-
+//vero e proprio algoritmo di fibonacci
 jint unfibonacci(jint n) {
     if (n==0) return 0;
     if (n==1) return 1;
@@ -92,24 +93,24 @@ jint unfibonacci(jint n) {
     return unfibonacci(n-1) + unfibonacci(n-2);
 }
 
+//algoritmo per misurare il tempo di fibonacci(al suo interno chiama fibonacci)
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
-
     unfibonacci(n);
-
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec-start.tv_sec) * 1000;
     t += (long long) ((stop.tv_usec-start.tv_usec)/1000);
     return (jlong) t;
 }
 
+//algoritmo di prodotto di due matrici
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
+    //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
     gettimeofday(&start, NULL);
-
     int fatt1[n][n];
     int fatt2[n][n];
     int ris[n][n];
@@ -128,13 +129,13 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject o
             }
         }
     }
-
     gettimeofday(&stop, NULL);
-    t = (stop.tv_sec-start.tv_sec) * 1000;
-    t += (long long) ((stop.tv_usec-start.tv_usec)/1000);
+    t = (stop.tv_sec - start.tv_sec) * 1000;
+    t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);
     return (jlong) t;
 }
 
+//vero e proprio algoritmo di ackerman
 jint unacker(jint m, jint n) {
     if (m == 0) return n + 1;
     if ((m > 0) && (n == 0)) return unacker(m - 1, 1);
@@ -142,13 +143,12 @@ jint unacker(jint m, jint n) {
     else return unacker(m - 1, unacker(m, n - 1));
 }
 
+//misurazione del tempo di esecuzione di ackerman
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jint m, jint n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
-
     unacker(m, n);
-
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec-start.tv_sec) * 1000;
     t += (long long) ((stop.tv_usec-start.tv_usec)/1000);

@@ -2,6 +2,22 @@ package javacpp.cmr.com.sdkvsndk;
 
 public class Algorithm {
 
+    //flag per permettere l'uscita dell'algoritmo in caso in cui sia stato premuto su stop
+    private static boolean flag = false;
+
+    //metodi per accedere al flag
+    public void cancella(){
+        flag = true;
+    }
+
+    public void setta(){
+        flag = false;
+    }
+
+    public boolean visualizza(){
+        return flag;
+    }
+
     /*Generazione di sequenze di numeri casuali
     * usero il linear conguential generetor come algoritmo che e' semplice ed efficace
     * mi bastano poche variabili
@@ -12,13 +28,13 @@ public class Algorithm {
     * useremo come seme il tempo con current time millis e sara sempre il
     * primo elemento della lista
     */
-    public static long Random (long n){
-        long m = 4294967296L; // = 2^32 (L per i long)
-        long a = 432274426543147L; //numero primo a 15 cifre (L per i long)
-        int c = 42430867; // un altro numero primo molto grande a 8 cifre
-        long x; //dove andra il numero casuale
-        long x0;//seme
-        long start, end; //per il tempo
+    public static long random (long n){
+        long m = 4294967296L;       // = 2^32 (L per i long)
+        long a = 432274426543147L;  //numero primo a 15 cifre (L per i long)
+        int c = 42430867;           // un altro numero primo molto grande a 8 cifre
+        long x;                     //dove andra il numero casuale
+        long x0;                    //seme
+        long start, end;            //per il tempo
         //inizio algoritmo e prendo primo tempo
         start = System.currentTimeMillis(); //primo tempo
         x0 = System.currentTimeMillis(); //inizializzazzione seme
@@ -31,11 +47,12 @@ public class Algorithm {
         end = System.currentTimeMillis(); //secondo tempo
         return (end - start);
     }
+
     /*Algoritmo Nested Loops
     * Un algoritmo molto semplice prende come parametro di ingresso un numero intero n
     * e fa sei cicli uno dentro l'altro con ognuno n iterazioni
      */
-    public static long NestedLoops (int n){
+    public static long nestedLoops (int n){
         int i, j, k, l, r, p; //contatori dei cicli
         long start, end;
         //inizio algoritmo e prendo primo tempo
@@ -46,7 +63,7 @@ public class Algorithm {
                     for(l = 0; l < n; l++){
                         for(r = 0; r < n; r++){
                             for(p = 0; p < n; p++){
-                                //non faccio niente
+                                //non faccio niente verifico solo il flag
                                 if(flag) return -1;
                             }
                         }
@@ -59,10 +76,8 @@ public class Algorithm {
         return (end - start);
     }
 
-    protected static boolean flag = false;
-
-    public static int unfibonacci(int n) {
-
+    //vero e proprio algoritmo di fibonacci
+    private static int unfibonacci(int n) {
         if (n == 0)
             return 0;
         if (n == 1)
@@ -72,14 +87,20 @@ public class Algorithm {
             return unfibonacci(n-1) + unfibonacci(n-2);
     }
 
+    //incapsulamento di fibonacci per la misura del tempo
     public static long fibonacci(int n) {
-        long s = System.currentTimeMillis();
+        long start, end;            //per il tempo
+        start = System.currentTimeMillis(); //primo tempo
         unfibonacci(n);
-        long e = System.currentTimeMillis();
-        return (e - s);
+        end = System.currentTimeMillis();
+        return (end - start);
     }
 
-    public static void calcMatr(int n) {
+    //algoritmo di prodotto tra due matrici
+    public static long calcMatr(int n) {
+        long start, end;            //per il tempo
+        //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
+        start = System.currentTimeMillis(); //primo tempo
         int[][] fatt1 = new int[n][n];
         int[][] fatt2 = new int[n][n];
         int[][] ris = new int[n][n];
@@ -98,12 +119,20 @@ public class Algorithm {
                 }
             }
         }
+        end = System.currentTimeMillis();
+        return (end - start);
     }
 
-    public static int acker(int m, int n) {
+    //vero e proprio algoritmo di ackerman
+    private static int acker(int m, int n) {
         if (m == 0) return n + 1;
         if ((m > 0) && (n == 0)) return acker(m - 1, 1);
         if(flag) return 0;
         else return acker(m - 1, acker(m, n - 1));
     }
+
+    /*
+     *ATTENZIONE
+     *manca il metodo per misurare il tempo dell'algoritmo di ackerman
+     */
 }

@@ -16,7 +16,7 @@ public class GraphActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
     private TextView titolo, datiC, datiJava, datiInput, in, c, j;
-    GraphView graph;
+    private GraphView graph;
 
     //variabili di utilizzo
     private int pos;

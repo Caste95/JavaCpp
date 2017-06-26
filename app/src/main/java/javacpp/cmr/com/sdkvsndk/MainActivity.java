@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public native long fibonacci(int n);
     public native void calcMatr(int n);
     public native long acker(int m, int n);
-    public native long Random(long n);
-    public native long NestedLoops(int n);
+    public native long random(long n);
+    public native long nestedLoops(int n);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +75,15 @@ public class MainActivity extends AppCompatActivity {
                         case 3:
                             //chiamo l'algoritmo di NestedLoop
                             //dovro farlo con un asyncTask
-                            tj = Algorithm.NestedLoops(x);
-                            tc = NestedLoops(x);
+                            tj = Algorithm.nestedLoops(x);
+                            tc = nestedLoops(x);
                             break;
                         case 4:
                             //chiamo l'algoritmo di Numeri Casuali
                             //dovro farlo con un asyncTask
                             int in = (int) (x * Math.pow(10, 6));
-                            tj = Algorithm.Random(in);
-                            tc = Random(in);
+                            tj = Algorithm.random(in);
+                            tc = random(in);
                             break;
                         case 5:
                             //chiamo l'algoritmo di Ackermann
