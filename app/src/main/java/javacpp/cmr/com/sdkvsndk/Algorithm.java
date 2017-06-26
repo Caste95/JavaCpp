@@ -1,20 +1,20 @@
 package javacpp.cmr.com.sdkvsndk;
 
-class Algorithm {
+public class Algorithm {
 
     //flag per permettere l'uscita dell'algoritmo in caso in cui sia stato premuto su stop
     private static boolean flag = false;
 
     //metodi per accedere al flag
-    public void cancella(){
+    public static void cancella(){
         flag = true;
     }
 
-    public void setta(){
+    public static void setta(){
         flag = false;
     }
 
-    public boolean visualizza(){
+    public static boolean visualizza(){
         return flag;
     }
 
@@ -137,4 +137,23 @@ class Algorithm {
      *ATTENZIONE
      *manca il metodo per misurare il tempo dell'algoritmo di ackerman
      */
+
+
+    public static long primalityTest(long x) {
+        long s = System.currentTimeMillis();
+
+
+        long e = System.currentTimeMillis();
+        return e-s;
+    }
+
+    public static long eratostene(long x) {
+        long s = System.currentTimeMillis();
+
+
+        long e = System.currentTimeMillis();
+        return e-s;
+    }
+
+
 }

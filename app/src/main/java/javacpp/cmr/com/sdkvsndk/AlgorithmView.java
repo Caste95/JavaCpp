@@ -42,7 +42,7 @@ public class AlgorithmView {
 
     //costruttore
     AlgorithmView(int nome, int tipo, int desc){
-        super();
+        super(); //TODO rimuovi
         id = id_counter++;
         this.nome = nome;
         this.tipo = tipo;

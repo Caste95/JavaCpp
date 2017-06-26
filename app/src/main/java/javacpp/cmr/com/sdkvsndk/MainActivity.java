@@ -1,6 +1,7 @@
 package javacpp.cmr.com.sdkvsndk;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,30 +14,33 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
-    private TextView titolo, desc, ris1, ris2;
+    private TextView desc, ris1, ris2;
     private Button go, stop, plot;
     private EditText input;
-    private ProgressBar progressBar;
-
+    private ProgressBar prBar;
     //varibili di utilizzo
     private int x;
     private long tj, tc;
     private int pos;
+
+    Worker w;
 
     // carico la libreria nativ-lib
     static {
         System.loadLibrary("native-lib");
     }
 
-    //assegno i metodi
+    //dichiaro i metodi
     public native void cancella();
     public native void setta();
     public native boolean visualizza();
     public native long fibonacci(int n);
-    public native long calcMatr(int n);
+    public native void calcMatr(int n);
     public native long acker(int m, int n);
     public native long random(long n);
     public native long nestedLoops(int n);
+    public native long eratostene(int n);
+    public native long primalityTest(long n);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
-        titolo = (TextView) findViewById(R.id.titolo);
         desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
@@ -52,61 +55,22 @@ public class MainActivity extends AppCompatActivity {
         stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
-        progressBar = (ProgressBar) findViewById(R.id.bar);
+        prBar = (ProgressBar) findViewById(R.id.bar);
 
         //recupero i dati passati dall'intent
         pos = getIntent().getIntExtra("pos", 0);
-        titolo.setText(AlgorithmView.list[pos].getNome());
         desc.setText(AlgorithmView.list[pos].getDesc());
 
+        //La progress bar rimane visibile (PERCHÈ???)
+        prBar.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     x = Integer.parseInt(input.getText().toString());
-                    switch (pos) {
-                        case 0:
-                            //chiamo l'algoritmo di Fibonacci
-                            //dovro farlo con un asyncTask
-                            tj = Algorithm.fibonacci(x);
-                            tc = fibonacci(x);
-                            break;
-                        case 1:
-                            //chiamo l'algoritmo di Prodotto Matriciale
-                            //dovro farlo con un asyncTask
-                            tj = Algorithm.calcMatr(x);
-                            tc = calcMatr(x);
-                            break;
-                        case 2:
-                            //chiamo l'algoritmo di Numeri Primi
-                            //dovro farlo con un asyncTask
-                            break;
-                        case 3:
-                            //chiamo l'algoritmo di NestedLoop
-                            //dovro farlo con un asyncTask
-                            tj = Algorithm.nestedLoops(x);
-                            tc = nestedLoops(x);
-                            break;
-                        case 4:
-                            //chiamo l'algoritmo di Numeri Casuali
-                            //dovro farlo con un asyncTask
-                            int in = (int) (x * Math.pow(10, 6));
-                            tj = Algorithm.random(in);
-                            tc = random(in);
-                            break;
-                        case 5:
-                            //chiamo l'algoritmo di Ackermann
-                            //dovro farlo con un asyncTask
-                            break;
-                        default:
-                            Toast.makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                    ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
-                    ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
+                    w = new Worker();
+                    w.execute((long)x);
 
-                    //adesso dovro aggiornare il db
-                    AlgorithmView.list[pos].updateDB(MainActivity.this, x, tc, tj);
                 }
                 catch (Exception e){
                     Toast.makeText(MainActivity.this, R.string.toast, Toast.LENGTH_LONG).show();
@@ -135,14 +99,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!w.isCancelled())
+                    w.terminate();
+            }
+        });
     }
 
+
+    //TODO: onPause()
+    //onCreate() vs onStart() per definire i listener dei bottoni
 
     //Siccome se premo back lui mi riporta all' activity precedente ma non ricrea la lista
     //ho bisogno di lanciarla tramite un intent così sarà ricreata e quindi avrà la visualizzazzione aggiornata
     //ovviamente la activity precedente dovra essere stata distrutta
     @Override
     public void onBackPressed() {
+        if(!w.isCancelled())
+            w.terminate();
         Intent i = new Intent( this, ListActivity.class);
         startActivity(i);
         //scelgo di distruggerla perche se faccio back nell'activiti principale probabilmente
@@ -150,4 +127,83 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    private class Worker extends AsyncTask<Long, Void, Long[]>{
+
+        @Override
+        protected void onPreExecute(){
+            prBar.setVisibility(View.VISIBLE);
+            Algorithm.setta();
+            setta();
+        }
+
+        @Override
+        protected Long[] doInBackground(Long... params) {
+            Long[] res = new Long[2];
+            switch (pos) {
+                case 0:
+                    //chiamo l'algoritmo di Fibonacci
+                    //dovro farlo con un asyncTask
+                    break;
+                case 1:
+                    //chiamo l'algoritmo di Prodotto Matriciale
+                    //dovro farlo con un asyncTask
+                    break;
+                case 2:
+                    //chiamo l'algoritmo di PrimalityTest
+                    res[0] = Algorithm.primalityTest(x);
+                    res[1] = primalityTest(x);
+                    break;
+                case 3:
+                    //chiamo l'algoritmo di NestedLoop
+                    //dovro farlo con un asyncTask
+                    res[0] = Algorithm.nestedLoops(x);
+                    res[1] = nestedLoops(x);
+                    break;
+                case 4:
+                    //chiamo l'algoritmo di Numeri Casuali
+                    int in = (int) (x * Math.pow(10, 6));
+                    res[0] = Algorithm.random(in);
+                    res[1] = random(in);
+                    break;
+                case 5:
+                    //chiamo l'algoritmo di Ackermann
+                    //dovro farlo con un asyncTask
+                    break;
+                case 6:
+                    //chiamo l'algoritmo di Eratostene
+                    res[0] = Algorithm.eratostene(x);
+                    res[1] = eratostene(x);
+                    break;
+                default:
+                    Toast.makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
+                    break;
+            }
+            return res;
+        }
+
+        @Override
+        protected void onPostExecute(Long[] res){
+            tj = res[0];
+            tc = res[1];
+            prBar.setVisibility(View.INVISIBLE);
+            ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
+            ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
+
+            //adesso dovro aggiornare il db
+            AlgorithmView.list[pos].updateDB(MainActivity.this, x, tc, tj);
+        }
+
+        //Eseguito DOPO doInBackground() ---> creo un altro metodo per cancellare il task
+        @Override
+        protected void onCancelled(){
+            prBar.setVisibility(View.INVISIBLE);
+        }
+
+        //termina il più velocemente possibile il task
+        public void terminate(){
+            cancel(true);
+            Algorithm.cancella();
+            cancella();
+        }
+    }
 }
