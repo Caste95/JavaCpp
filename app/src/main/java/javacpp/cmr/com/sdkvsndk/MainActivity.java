@@ -48,16 +48,6 @@ public class MainActivity extends AppCompatActivity {
         pos = getIntent().getIntExtra("pos", 0);
         desc.setText(AlgorithmView.list[pos].getDesc());
 
-        //recupero i dati dal bundle se ci sono(in caso di app distrutta)
-        if(savedInstanceState != null){
-            String execJava = savedInstanceState.getString("java");
-            String execC = savedInstanceState.getString("c");
-            if(execJava != null)
-                ris1.setText(execJava);
-            if(execC != null)
-                ris2.setText(execC);
-        }
-
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,16 +133,6 @@ public class MainActivity extends AppCompatActivity {
         //scelgo di distruggerla perche se faccio back nell'activiti principale probabilmente
         //voglio chiuderla e non tornare all'activity dell'esecuzione dell'algoritmo
         finish();
-    }
-
-    //in caso venga girato lo schermo voglio che l'output venga visualizzato ancora
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        String execJava = ris1.getText().toString();
-        String execC = ris2.getText().toString();
-        savedInstanceState.putString("java", execJava);
-        savedInstanceState.putString("c", execC);
-        super.onSaveInstanceState(savedInstanceState);
     }
 
 }

@@ -38,12 +38,12 @@ public class AlgorithmView {
     private long esej = 0; //ultimo tempo esecuzione java
 
     //variabili per il db
-    SQLiteDatabase db;
-    DBOpenHelper oh;
+    private SQLiteDatabase db;
+    private DBOpenHelper oh;
 
     //variabili per plottare il grafico
-    LineGraphSeries<DataPoint> seriesC;
-    LineGraphSeries<DataPoint> seriesJava;
+    private LineGraphSeries<DataPoint> seriesC;
+    private LineGraphSeries<DataPoint> seriesJava;
 
     //costruttore
     AlgorithmView(int nome, int tipo, int desc){
@@ -54,7 +54,7 @@ public class AlgorithmView {
         this.desc = desc;
     }
 
-    //metodi set e get (solo pochi servono real
+    //metodi
     public int getId() {
         return id;
     }
