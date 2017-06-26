@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     //ovviamente la activity precedente dovra essere stata distrutta
     @Override
     public void onBackPressed() {
-        if(!w.isCancelled())
+        if(w !=null && !w.isCancelled())
             w.terminate();
         Intent i = new Intent( this, ListActivity.class);
         startActivity(i);

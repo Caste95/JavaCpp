@@ -4,7 +4,7 @@
     <string name="outputcpp">Output C++</string>
     <string name="buttonGo">GO</string>
     <string name="buttonStop">STOP</string>
-    <string name="toast">Iserire Input</string>
+    <string name="toast">Inserire Input</string>
     <string name="toastError">Errore Applicativo</string>
     <string name="cpu">CPU Bound</string>
     <string name="memory">Memory Bound</string>
@@ -12,14 +12,14 @@
     <string name="cas">Numeri Casuali</string>
     <string name="mat">Prodotto Matriciale</string>
     <string name="prim">Numeri Primi</string>
-    <string name="ack">Ackerman</string>
+    <string name="ack">Ackermann</string>
     <string name="loop">NestedLoops</string>
     <string name="era">Crivello di Eratostene</string>
     <string name="fibd">Descrizione algoritmo Fibonacci</string>
     <string name="casd">Descrizione algoritmo Numeri Casuali</string>
     <string name="matd">Descrizione algoritmo Prodotto Matriciale</string>
     <string name="primd">Descrizione algoritmo Numeri Primi</string>
-    <string name="ackd">Descrizione algoritmo Ackerman</string>
+    <string name="ackd">Descrizione algoritmo Ackermann</string>
     <string name="loopd">Descrizione algoritmo NestedLoops</string>
     <string name="arad">Descrizione algoritmo del crivello di Eratostene</string>
     <string name="resjava">Algoritmo Java: </string>
