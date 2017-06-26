@@ -108,7 +108,7 @@ public class GraphActivity extends AppCompatActivity {
                 in.setText(R.string.Input);
                 c.setText(R.string.c);
                 j.setText(R.string.java);
-                datiInput.setText((String) Integer.toString(input));
+                datiInput.setText(Integer.toString(input));
                 datiC.setText(outc);
                 datiJava.setText(outjava);
             }
