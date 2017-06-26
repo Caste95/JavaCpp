@@ -88,7 +88,7 @@ public class GraphActivity extends AppCompatActivity {
         /*
             * PROBLEMA CON I LISTNER:
             * i listener funzionano ma con i dati sovrapposti anche se clicco una sola volta me lo
-            * fa deu volte perchè è come se avessi toccato entrambi i punti quindi volendo basta un
+            * fa due volte perchè è come se avessi toccato entrambi i punti quindi volendo basta un
             * solo listner perchè tanto mi basta solo un dato che è quello dell'input
          */
         seriesC.setOnDataPointTapListener(new OnDataPointTapListener() {
@@ -114,9 +114,11 @@ public class GraphActivity extends AppCompatActivity {
             }
         });
 
-        //dovrei implementare anche questo metodo allo stesso modo ma siccome le due linee sono abbastanza
-        //vicine non serve mi fara l'output lo stesso
         /*
+            * implemento lo stesso anche l'altro listner in caso i grafici siano distanti cosi
+            * l'utente non si "preoccupera" in caso non gli appaia qualcosa del grafico anche se ha toccato
+            * tanto per quanto riguarda l'efficenza ho visto che il programma non ne risente
+         */
         seriesJava.setOnDataPointTapListener(new OnDataPointTapListener() {
             @Override
             public void onTap(Series series, DataPointInterface dataPoint) {
@@ -139,7 +141,6 @@ public class GraphActivity extends AppCompatActivity {
                 datiJava.setText(outjava);
             }
         });
-        */
 
     }
 
