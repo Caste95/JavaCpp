@@ -14,12 +14,14 @@
     <string name="prim">Numeri Primi</string>
     <string name="ack">Ackerman</string>
     <string name="loop">NestedLoops</string>
+    <string name="era">Crivello di Eratostene</string>
     <string name="fibd">Descrizione algoritmo Fibonacci</string>
     <string name="casd">Descrizione algoritmo Numeri Casuali</string>
     <string name="matd">Descrizione algoritmo Prodotto Matriciale</string>
     <string name="primd">Descrizione algoritmo Numeri Primi</string>
     <string name="ackd">Descrizione algoritmo Ackerman</string>
     <string name="loopd">Descrizione algoritmo NestedLoops</string>
+    <string name="arad">Descrizione algoritmo del crivello di Eratostene</string>
     <string name="resjava">Algoritmo Java: </string>
     <string name="resc">Algoritmo C: </string>
     <string name="unita">(ms)</string>
@@ -29,6 +31,11 @@
     <string name="TitoloGrafico">Titolo Grafico</string>
     <string name="java">Java</string>
     <string name="c">C</string>
-    <string name="era">Crivello di Eratostene</string>
-    <string name="arad">Descrizione algoritmo del crivello di Eratostene</string>
+    <string name="titoloalg">Titolo</string>
+    <string name="descalg">Descrizione algoritmo</string>
+    <string name="tipoalg">Tipo algoritmo</string>
+    <string name="primaparte">Ultima esecuzione(ms) c++:</string>
+    <string name="secondaparte">java:</string>
+    <string name="terzaparte">Input:</string>
+    <string name="zero">0</string>
 </resources>

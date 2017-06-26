@@ -94,7 +94,9 @@ jint unfibonacci(jint n) {
 }
 
 //algoritmo per misurare il tempo di fibonacci(al suo interno chiama fibonacci)
-jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, jint n) {
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
@@ -106,7 +108,9 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject 
 }
 
 //algoritmo di prodotto di due matrici
-jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
     //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
@@ -144,7 +148,9 @@ jint unacker(jint m, jint n) {
 }
 
 //misurazione del tempo di esecuzione di ackerman
-jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jint m, jint n) {
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jint m, jint n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);

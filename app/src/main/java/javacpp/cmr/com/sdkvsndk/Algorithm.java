@@ -92,7 +92,8 @@ public class Algorithm {
         long start, end;            //per il tempo
         start = System.currentTimeMillis(); //primo tempo
         unfibonacci(n);
-        end = System.currentTimeMillis();
+        //fine algoritmo
+        end = System.currentTimeMillis(); //secondo tempo
         return (end - start);
     }
 
@@ -119,7 +120,8 @@ public class Algorithm {
                 }
             }
         }
-        end = System.currentTimeMillis();
+        //fine algoritmo
+        end = System.currentTimeMillis(); //secondo tempo
         return (end - start);
     }
 

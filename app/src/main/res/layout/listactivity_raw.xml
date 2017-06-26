@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:padding="5dp"
-            android:text="Nome Algoritmo"
+            android:text="@string/titoloalg"
             android:textColor="#000"
             android:textSize="25sp"
             android:layout_weight="8">
@@ -27,9 +27,9 @@
         <TextView
             android:id="@+id/tipoA"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="match_parent"
             android:padding="5dp"
-            android:text="Tipo algoritmo"
+            android:text="@string/tipoalg"
             android:textColor="@color/colorAccent"
             android:textSize="9sp"
             android:layout_weight="2"
@@ -49,7 +49,7 @@
             android:id="@+id/esec"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Ultima esecuzione(ms) c++:"
+            android:text="@string/primaparte"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textColor="@color/colorPrimary"
@@ -59,7 +59,7 @@
         </TextView>
 
         <TextView
-            android:text="0"
+            android:text="@string/zero"
             android:id="@+id/c"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -74,7 +74,7 @@
             android:id="@+id/esej"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="java:"
+            android:text="@string/secondaparte"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textColor="@color/colorPrimary"
@@ -84,7 +84,7 @@
         </TextView>
 
         <TextView
-            android:text="0"
+            android:text="@string/zero"
             android:id="@+id/j"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -98,7 +98,7 @@
             android:id="@+id/inp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Input:"
+            android:text="@string/terzaparte"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textColor="@color/colorPrimary"
@@ -108,7 +108,7 @@
         </TextView>
 
         <TextView
-            android:text="0"
+            android:text="@string/zero"
             android:id="@+id/inp2"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

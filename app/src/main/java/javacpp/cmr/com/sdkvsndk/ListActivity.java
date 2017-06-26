@@ -53,7 +53,7 @@ public class ListActivity extends AppCompatActivity {
         //ora faccio la lista cliccabile
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adattatore,  View view, int pos, long id){
+            public void onItemClick(AdapterView<?> adattatore, View view, int pos, long id){
                 // qui lancero la ExecutinonsActivity con un intent esplicito e passero la posizione
                 // che serve per la visualizzazzione della descrizzione
                 Intent i = new Intent( view.getContext(), MainActivity.class);

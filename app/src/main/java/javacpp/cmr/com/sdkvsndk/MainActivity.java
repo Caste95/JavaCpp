@@ -6,15 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
-    private TextView desc, ris1, ris2;
+    private TextView titolo, desc, ris1, ris2;
     private Button go, stop, plot;
     private EditText input;
+    private ProgressBar progressBar;
 
     //varibili di utilizzo
     private int x;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public native void setta();
     public native boolean visualizza();
     public native long fibonacci(int n);
-    public native void calcMatr(int n);
+    public native long calcMatr(int n);
     public native long acker(int m, int n);
     public native long random(long n);
     public native long nestedLoops(int n);
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
+        titolo = (TextView) findViewById(R.id.titolo);
         desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
@@ -49,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
         stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
+        progressBar = (ProgressBar) findViewById(R.id.bar);
 
         //recupero i dati passati dall'intent
         pos = getIntent().getIntExtra("pos", 0);
+        titolo.setText(AlgorithmView.list[pos].getNome());
         desc.setText(AlgorithmView.list[pos].getDesc());
 
         go.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +68,14 @@ public class MainActivity extends AppCompatActivity {
                         case 0:
                             //chiamo l'algoritmo di Fibonacci
                             //dovro farlo con un asyncTask
+                            tj = Algorithm.fibonacci(x);
+                            tc = fibonacci(x);
                             break;
                         case 1:
                             //chiamo l'algoritmo di Prodotto Matriciale
                             //dovro farlo con un asyncTask
+                            tj = Algorithm.calcMatr(x);
+                            tc = calcMatr(x);
                             break;
                         case 2:
                             //chiamo l'algoritmo di Numeri Primi
