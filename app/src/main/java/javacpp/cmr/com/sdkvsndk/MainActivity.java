@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //assegno i metodi
+    public native void cancella();
+    public native void setta();
+    public native boolean visualizza();
+    public native long fibonacci(int n);
+    public native void calcMatr(int n);
+    public native long acker(int m, int n);
     public native long Random(long n);
     public native long NestedLoops(int n);
 
