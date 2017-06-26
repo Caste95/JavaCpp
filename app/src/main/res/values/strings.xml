@@ -29,6 +29,6 @@
     <string name="TitoloGrafico">Titolo Grafico</string>
     <string name="java">Java</string>
     <string name="c">C</string>
-    <string name="ara">Crivello di Eratostene</string>
+    <string name="era">Crivello di Eratostene</string>
     <string name="arad">Descrizione algoritmo del crivello di Eratostene</string>
 </resources>
