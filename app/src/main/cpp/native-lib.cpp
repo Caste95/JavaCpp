@@ -13,7 +13,7 @@
 */
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_com_example_davide_javavscc_ExecutionsActivity_Random(JNIEnv* env, jobject, jlong n){
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_Random(JNIEnv* env, jobject, jlong n){
     unsigned long long m = 4294967296L; // = 2^32
     unsigned long long a = 432274426543147L; //numero primo a 15 cifre
     unsigned int c = 42430867; // un altro numero primo molto grande a 8 cifre
@@ -40,7 +40,7 @@ Java_com_example_davide_javavscc_ExecutionsActivity_Random(JNIEnv* env, jobject,
 */
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_com_example_davide_javavscc_ExecutionsActivity_NestedLoops(JNIEnv* env, jobject, jint n){
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_NestedLoops(JNIEnv* env, jobject, jint n){
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
