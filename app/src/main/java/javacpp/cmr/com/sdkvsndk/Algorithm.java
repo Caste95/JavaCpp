@@ -23,6 +23,7 @@ public class Algorithm {
         start = System.currentTimeMillis(); //primo tempo
         x0 = System.currentTimeMillis(); //inizializzazzione seme
         for(int i = 1; i < n; i++){
+            if(flag) break;
             x = ((a * x0) + c) % m;
             x0 = x;
         }
@@ -46,6 +47,7 @@ public class Algorithm {
                         for(r = 0; r < n; r++){
                             for(p = 0; p < n; p++){
                                 //non faccio niente
+                                if(flag) return -1;
                             }
                         }
                     }
@@ -55,5 +57,53 @@ public class Algorithm {
         //fine algoritmo
         end = System.currentTimeMillis(); //secondo tempo
         return (end - start);
+    }
+
+    protected static boolean flag = false;
+
+    public static int unfibonacci(int n) {
+
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return 1;
+        if(flag) return 0;
+        else
+            return unfibonacci(n-1) + unfibonacci(n-2);
+    }
+
+    public static long fibonacci(int n) {
+        long s = System.currentTimeMillis();
+        unfibonacci(n);
+        long e = System.currentTimeMillis();
+        return (e - s);
+    }
+
+    public static void calcMatr(int n) {
+        int[][] fatt1 = new int[n][n];
+        int[][] fatt2 = new int[n][n];
+        int[][] ris = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            if (flag) break;
+            for (int j = 0; j < n; j++) {
+                fatt1[i][j] = (int)(Math.random()*100);
+                fatt2[i][j] = (int)(Math.random()*100);
+            }
+        }
+        for (int j = 0; j < n; j++) {
+            if (flag) break;
+            for (int i = 0; i < n; i++) {
+                for (int l = 0; l < n; l++) {
+                    ris[i][j] += fatt1[l][j] * fatt2[i][l];
+                }
+            }
+        }
+    }
+
+    public static int acker(int m, int n) {
+        if (m == 0) return n + 1;
+        if ((m > 0) && (n == 0)) return acker(m - 1, 1);
+        if(flag) return 0;
+        else return acker(m - 1, acker(m, n - 1));
     }
 }
