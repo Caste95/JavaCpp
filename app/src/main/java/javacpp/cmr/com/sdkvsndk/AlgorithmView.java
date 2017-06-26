@@ -15,11 +15,6 @@ import android.provider.BaseColumns;
   * Inoltre serve per la creazione dei dati da mettere nel grafico
  */
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -302,7 +297,7 @@ public class AlgorithmView {
             new AlgorithmView(R.string.loop, R.string.cpu, R.string.loopd),
             new AlgorithmView(R.string.cas, R.string.cpu, R.string.casd),
             new AlgorithmView(R.string.ack, R.string.cpu, R.string.ackd),
-            new AlgorithmView(R.string.ara, R.string.cpu, R.string.arad)
+            new AlgorithmView(R.string.era, R.string.cpu, R.string.arad)
     };
 
 }
