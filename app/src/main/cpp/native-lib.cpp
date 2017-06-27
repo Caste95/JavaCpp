@@ -15,7 +15,7 @@ void Java_javacpp_cmr_com_sdkvsndk_MainActivity_cancella(JNIEnv *env, jobject ob
 jboolean Java_javacpp_cmr_com_sdkvsndk_MainActivity_visualizza(JNIEnv *env, jobject obj) {
     return (jboolean) flag;
 }
-extern "C"
+
 void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) {
     flag = false;
 }
@@ -30,9 +30,8 @@ void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) 
 * useremo come seme il tempo con current time millis e sara sempre il
 * primo elemento della lista
 */
-extern "C"
-JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv *env, jobject, jlong n) {
+
+jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv *env, jobject, jlong n) {
     unsigned long long m = 4294967296L; // = 2^32
     unsigned long long a = 432274426543147L; //numero primo a 15 cifre
     unsigned int c = 42430867; // un altro numero primo molto grande a 8 cifre
@@ -58,9 +57,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv *env, jobject, jlong n)
 * Un algoritmo molto semplice prende come parametro di ingresso un numero intero n
 * e fa sei cicli uno dentro l'altro con ognuno n iterazioni
 */
-extern "C"
-JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jint n) {
+jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jint n) {
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
@@ -98,9 +95,7 @@ jint unfibonacci(jint n) {
 }
 
 //algoritmo per misurare il tempo di fibonacci(al suo interno chiama fibonacci)
-extern "C"
-JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, jint n) {
+jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
@@ -113,8 +108,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, j
 
 //algoritmo di prodotto di due matrici
 
-JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
+jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
     //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
@@ -152,9 +146,7 @@ jlong unacker(jlong m, jlong n) {
 }
 
 //misurazione del tempo di esecuzione di ackerman
-extern "C"
-JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong m, jlong n) {
+jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong m, jlong n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
@@ -165,7 +157,6 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong
     return (jlong) t;
 }
 
-extern "C"
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_eratostene(JNIEnv *env, jobject obj, jlong n) {
     timeval start, stop;
     long long t;
@@ -198,7 +189,6 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_eratostene(JNIEnv *env, jobject
     return (jlong) t;
 }
 
-extern "C"
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobject obj, jlong r) {
     timeval start, stop;
     long long t;
@@ -214,7 +204,7 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
      * You can verify the correctness of the algorithm by uncomment the code below
     */
     /*
-    if (prime) { //TODO: Non stampa long long -.-
+    if (prime) { //TODO: Chiedere al tutor perchè non stampa long long -.-
         __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is prime", (long long) r);
     } else {
         __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is not prime", (long long) r);

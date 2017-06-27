@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private long tj, tc;
     private int pos;
 
+    //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
     private final long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
             2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
 
@@ -81,13 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
         //se scelgo ackermann utilizzo due edittext per i due parametri
         if (pos == 5) {
+            plot.setVisibility(View.INVISIBLE); //Ackermann non si può plottare
             input.setVisibility(View.GONE);
             inputm.setVisibility(View.VISIBLE);
             inputn.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams param =               //setto il peso della progress bar per poterla vedere in caso ci siano 2 input
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.4f);
             prBar.setLayoutParams(param);
-        }
+        }else plot.setVisibility(View.VISIBLE);
 
         //La progress bar rimane visibile (PERCHÈ???)
         prBar.setVisibility(View.INVISIBLE);
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                                 throw new Exception();
                             break;
                         case 1: //prodotto matriciale
-                            if(x >= 300)
+                            if(x >= 290)
                                 throw new Exception();
                             break;
                         case 2: //PrimalityTest
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                                 throw new Exception();
                             break;
                         case 5://Ackermann
-                            if(y > 4)
+                            if(y > 4 || ((y == 4) && z > 0)) //TODO: Crasha quasi sempre, non so come limitare l'input by Enrico
                                 throw new Exception();
                             break;
                         case 6: //Crivello di Eratostene
