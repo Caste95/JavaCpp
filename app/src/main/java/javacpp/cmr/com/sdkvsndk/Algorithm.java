@@ -39,7 +39,7 @@ class Algorithm {
         start = System.currentTimeMillis(); //primo tempo
         x0 = System.currentTimeMillis(); //inizializzazzione seme
         for(int i = 1; i < n; i++){
-            if(flag) break;
+            if(flag) return -1;
             x = ((a * x0) + c) % m;
             x0 = x;
         }
@@ -106,16 +106,16 @@ class Algorithm {
         int[][] fatt2 = new int[n][n];
         int[][] ris = new int[n][n];
         for (int i = 0; i < n; i++) {
-            if (flag) break;
             for (int j = 0; j < n; j++) {
+                if (flag) return -1;
                 fatt1[i][j] = (int)(Math.random()*100);
                 fatt2[i][j] = (int)(Math.random()*100);
             }
         }
         for (int j = 0; j < n; j++) {
-            if (flag) break;
             for (int i = 0; i < n; i++) {
                 for (int l = 0; l < n; l++) {
+                    if (flag) return -1;
                     ris[i][j] += fatt1[l][j] * fatt2[i][l];
                 }
             }

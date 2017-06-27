@@ -43,7 +43,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv *env, jobject, jlong n)
     gettimeofday(&start, NULL);
     x0 = (unsigned) time(NULL); //seme
     for (int i = 1; i < n; i++) {
-        if (flag) break;
+        if (flag) return -1;
         x = ((a * x0) + c) % m;
         x0 = x;
     }
@@ -121,16 +121,16 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, ji
     int fatt2[n][n];
     int ris[n][n];
     for (int i = 0; i < n; i++) {
-        if (flag) break;
         for (int j = 0; j < n; j++) {
+            if (flag) return -1;
             fatt1[i][j] = rand() % 100;
             fatt2[i][j] = rand() % 100;
         }
     }
     for (int j = 0; j < n; j++) {
-        if (flag) break;
         for (int i = 0; i < n; i++) {
             for (int l = 0; l < n; l++) {
+                if (flag) return -1;
                 ris[i][j] += fatt1[l][j] * fatt2[i][l];
             }
         }
