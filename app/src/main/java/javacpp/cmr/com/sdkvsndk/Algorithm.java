@@ -56,7 +56,7 @@ class Algorithm {
         int i, j, k, l, r, p; //contatori dei cicli
         long start, end;
         //inizio algoritmo e prendo primo tempo
-        start = System.currentTimeMillis(); //primo tempo
+        start = System.currentTimeMillis();//primo tempo
         for(i = 0; i < n; i++){
             for (j = 0; j < n; j++){
                 for(k = 0; k < n; k++){
@@ -101,7 +101,7 @@ class Algorithm {
     static long calcMatr(int n) {
         long start, end;            //per il tempo
         //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
-        start = System.currentTimeMillis(); //primo tempo
+        start = System.currentTimeMillis();//primo tempo
         int[][] fatt1 = new int[n][n];
         int[][] fatt2 = new int[n][n];
         int[][] ris = new int[n][n];
