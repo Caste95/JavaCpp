@@ -112,7 +112,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, j
 }
 
 //algoritmo di prodotto di due matrici
-extern "C"
+
 JNIEXPORT jlong JNICALL
 Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
@@ -205,10 +205,21 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
     gettimeofday(&start, NULL);
 
     bool prime = true;
-    for (long i = 2; i < sqrt(r) && prime; i++) {
+    for (jlong i = 2; i < sqrt(r) && prime; i++) {
         if (flag) return -1;
         if (r % i == 0) prime = false;
     }
+
+    /*
+     * You can verify the correctness of the algorithm by uncomment the code below
+    */
+    /*
+    if (prime) { //TODO: Non stampa long long -.-
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is prime", (long long) r);
+    } else {
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is not prime", (long long) r);
+    }
+    */
 
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
