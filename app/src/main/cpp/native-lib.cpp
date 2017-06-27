@@ -113,9 +113,13 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject o
     long long t;
     //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
     gettimeofday(&start, NULL);
+    char *v = (char*) malloc((size_t)3*n*n*4);
     int fatt1[n][n];
     int fatt2[n][n];
     int ris[n][n];
+    fatt1[0][0]=(int)v[0];
+    fatt2[0][0]=(int)v[0]+(4*n*n);
+    ris[0][0]=(int)v[0]+(2*4*n*n);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (flag) return -1;
@@ -131,6 +135,7 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject o
             }
         }
     }
+    free(v);
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
     t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);
