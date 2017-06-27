@@ -18,14 +18,14 @@ import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
 
-    //elementi interfaccia grafica
-    private TextView tit, desc, ris1, ris2;
-    private Button go, stop, plot;
+    private TextView ris1;
+    private TextView ris2;
+    private Button go;
+    private Button plot;
     private EditText input, inputm, inputn;
     private ProgressBar prBar;
     //varibili di utilizzo
     private int x, y, z;
-    private long tj, tc;
     private int pos;
 
     private Worker w;
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
-        tit = (TextView) findViewById(R.id.titolo);
-        desc = (TextView) findViewById(R.id.desc);
+        TextView tit = (TextView) findViewById(R.id.titolo);
+        TextView desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
         go = (Button) findViewById(R.id.buttonGo);
-        stop = (Button) findViewById(R.id.buttonStop);
+        Button stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
         inputm = (EditText) findViewById(R.id.inputm);
@@ -218,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Long[] res){
-            tj = res[0];
-            tc = res[1];
+            long tj = res[0];
+            long tc = res[1];
 
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);

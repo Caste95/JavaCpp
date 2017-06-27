@@ -43,7 +43,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_random(JNIEnv *env, jobject, jlong n)
     gettimeofday(&start, NULL);
     x0 = (unsigned) time(NULL); //seme
     for (int i = 1; i < n; i++) {
-        if (flag) break;
+        if (flag) return -1;
         x = ((a * x0) + c) % m;
         x0 = x;
     }
@@ -112,7 +112,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject obj, j
 }
 
 //algoritmo di prodotto di due matrici
-extern "C"
+
 JNIEXPORT jlong JNICALL
 Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
@@ -123,16 +123,16 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, ji
     int fatt2[n][n];
     int ris[n][n];
     for (int i = 0; i < n; i++) {
-        if (flag) break;
         for (int j = 0; j < n; j++) {
+            if (flag) return -1;
             fatt1[i][j] = rand() % 100;
             fatt2[i][j] = rand() % 100;
         }
     }
     for (int j = 0; j < n; j++) {
-        if (flag) break;
         for (int i = 0; i < n; i++) {
             for (int l = 0; l < n; l++) {
+                if (flag) return -1;
                 ris[i][j] += fatt1[l][j] * fatt2[i][l];
             }
         }
@@ -205,10 +205,21 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
     gettimeofday(&start, NULL);
 
     bool prime = true;
-    for (long i = 2; i < sqrt(r) && prime; i++) {
+    for (jlong i = 2; i < sqrt(r) && prime; i++) {
         if (flag) return -1;
         if (r % i == 0) prime = false;
     }
+
+    /*
+     * You can verify the correctness of the algorithm by uncomment the code below
+    */
+    /*
+    if (prime) { //TODO: Non stampa long long -.-
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is prime", (long long) r);
+    } else {
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is not prime", (long long) r);
+    }
+    */
 
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
