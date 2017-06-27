@@ -41,7 +41,7 @@ public class AlgorithmView {
     private LineGraphSeries<DataPoint> seriesJava;
 
     //costruttore
-    AlgorithmView(int nome, int tipo, int desc){
+    private AlgorithmView(int nome, int tipo, int desc){
         super(); //TODO rimuovi
         id = id_counter++;
         this.nome = nome;

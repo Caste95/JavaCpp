@@ -1,6 +1,6 @@
 package javacpp.cmr.com.sdkvsndk;
 
-public class Algorithm {
+class Algorithm {
 
     //flag per permettere l'uscita dell'algoritmo in caso in cui sia stato premuto su stop
     private static boolean flag = false;

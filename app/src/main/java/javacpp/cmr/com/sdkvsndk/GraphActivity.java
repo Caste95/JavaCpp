@@ -14,9 +14,12 @@ import com.jjoe64.graphview.series.Series;
 
 public class GraphActivity extends AppCompatActivity {
 
-    //elementi interfaccia grafica
-    private TextView titolo, datiC, datiJava, datiInput, in, c, j;
-    private GraphView graph;
+    private TextView datiC;
+    private TextView datiJava;
+    private TextView datiInput;
+    private TextView in;
+    private TextView c;
+    private TextView j;
 
     //variabili di utilizzo
     private int pos;
@@ -27,14 +30,14 @@ public class GraphActivity extends AppCompatActivity {
         setContentView(R.layout.activity_graph);
 
         //prendo gli id dell'interfaccia
-        titolo = (TextView) findViewById(R.id.titolo);
+        TextView titolo = (TextView) findViewById(R.id.titolo);
         in = (TextView) findViewById(R.id.In);
         c = (TextView) findViewById(R.id.c);
         j = (TextView) findViewById(R.id.j);
         datiInput = (TextView) findViewById(R.id.datiInput);
         datiC = (TextView) findViewById(R.id.datiC);
         datiJava = (TextView) findViewById(R.id.datiJava);
-        graph = (GraphView) findViewById(R.id.graph);
+        GraphView graph = (GraphView) findViewById(R.id.graph);
 
         //setto le due textview scrollabili in caso abbia più dati di quelli che ci possano stare
         datiC.setMovementMethod(new ScrollingMovementMethod());
@@ -136,7 +139,7 @@ public class GraphActivity extends AppCompatActivity {
                 in.setText(R.string.Input);
                 c.setText(R.string.c);
                 j.setText(R.string.java);
-                datiInput.setText((String) Integer.toString(input));
+                datiInput.setText(Integer.toString(input));
                 datiC.setText(outc);
                 datiJava.setText(outjava);
             }
