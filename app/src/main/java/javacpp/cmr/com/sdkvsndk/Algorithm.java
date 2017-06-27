@@ -139,17 +139,46 @@ public class Algorithm {
      */
 
 
-    public static long primalityTest(long x) {
+    public static long primalityTest(long n) {
         long s = System.currentTimeMillis();
 
+        boolean prime = true;
+        for(int i=2; i < Math.sqrt(n) && prime; i++) {
+            if(flag) return -1;
+            if (n % i == 0)
+                prime = false;
+        }
+        /*
+        * You can verify the correctness of the algorithm by uncomment the code below
+        */
+        /*
+        if(prime)
+            Log.i("Java PrimalityTest",n + " is prime");
+        else
+            Log.i("Java PrimalityTest",n + " is not prime");
+        */
 
         long e = System.currentTimeMillis();
         return e-s;
     }
 
-    public static long eratostene(long x) {
+    public static long eratostene(long r) {
         long s = System.currentTimeMillis();
 
+        int i, j;
+        boolean[] v = new boolean[(int) (r+1)]; //boolean vector
+        v[0] = v[1] = false;
+        for (i = 2; i <= r; i++) v[i] = true;// i is prime by default!
+        for (i = 2; i <= r; i++)
+            for (j = 2; i * j <= r; j++) {
+                if(flag) return -1;
+                v[i * j] = false; //disable multiples...
+            }
+        /*
+        * You can verify the correctness of the algorithm by uncomment the code below
+        */
+        //int c = 0; for(i = 0; i <= r; i++) if(v[i]) c++;
+        //Log.d("Java Eratoste\'s sieve", "There are " + c + " prime numbers");
 
         long e = System.currentTimeMillis();
         return e-s;
