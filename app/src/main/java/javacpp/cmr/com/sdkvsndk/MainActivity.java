@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     //dichiaro i metodi
     public native void cancella();
     public native void setta();
-    public native boolean visualizza();
     public native long fibonacci(int n);
     public native long calcMatr(int n);
     public native long acker(long m, long n);
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             prBar.setLayoutParams(param);
         }else plot.setVisibility(View.VISIBLE);
 
-        //La progress bar rimane visibile (PERCHÈ???)
+        //TODO: Chiedere al tutor perchè la progress bar rimane visibile
         prBar.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                     if (pos == 5) {
                         y = Integer.parseInt(inputm.getText().toString());
                         z = Integer.parseInt(inputn.getText().toString());
-
                     }
                     else {
                         x = Integer.parseInt(input.getText().toString());
@@ -182,17 +180,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
 
-    //TODO: onPause()
-    //onCreate() vs onStart() per definire i listener dei bottoni
+        //termina il task
+        if(w != null && !w.isCancelled())
+            w.terminate();
+    }
 
     //Siccome se premo back lui mi riporta all' activity precedente ma non ricrea la lista
     //ho bisogno di lanciarla tramite un intent così sarà ricreata e quindi avrà la visualizzazzione aggiornata
     //ovviamente la activity precedente dovra essere stata distrutta
     @Override
     public void onBackPressed() {
+        //termina il task
         if(w !=null && !w.isCancelled())
             w.terminate();
+
         Intent i = new Intent( this, ListActivity.class);
         startActivity(i);
         //scelgo di distruggerla perche se faccio back nell'activiti principale probabilmente
@@ -207,14 +212,18 @@ public class MainActivity extends AppCompatActivity {
             go.setVisibility(View.INVISIBLE);
             plot.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.VISIBLE);
+
+            //setto i flag a false permettendo la normale esecuzione degli algoritmi
             Algorithm.setta();
             setta();
         }
 
         @Override
-        protected Long[] doInBackground(Integer... params) {
+        protected Long[] doInBackground(Integer... params) { //Spawn di un thread separato, la UI rimane responsive
             Long[] res = new Long[2];
             int in;
+
+            //scelgo quale algoritmo chiamare
             switch (pos) {
                 case 0:
                     //chiamo l'algoritmo di Fibonacci
@@ -232,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop
-                    //dovro farlo con un asyncTask
                     res[0] = Algorithm.nestedLoops(x);
                     res[1] = nestedLoops(x);
                     break;
@@ -261,9 +269,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Long[] res){
-            tj = res[0];
-            tc = res[1];
+        protected void onPostExecute(Long[] res){ //eseguito dopo che il task è terminato correttamente, sono nel thread UI
+            //rendo esplicito il risultato
+            tj = res[0]; //tempo java
+            tc = res[1]; //tempo cpp
 
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
@@ -278,11 +287,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Eseguito DOPO doInBackground() ---> creo un altro metodo per cancellare il task: terminate()
         @Override
-        protected void onCancelled(){
+        protected void onCancelled(){ //Rendo visibili i pulsanti go e plotta, e visualizzo un toast di notifica
+            Toast.makeText(MainActivity.this, R.string.canc, Toast.LENGTH_LONG).show();
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.INVISIBLE);
             plot.setVisibility(View.INVISIBLE);
-            Toast.makeText(MainActivity.this, R.string.canc, Toast.LENGTH_SHORT).show();
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
         }
@@ -290,8 +299,8 @@ public class MainActivity extends AppCompatActivity {
         //termina il più velocemente possibile il task
         public void terminate(){
             cancel(true); //cancella il task, non potrà più essere eseguito
-            Algorithm.cancella(); //termina java
-            cancella(); //termina c++
+            Algorithm.cancella(); //termina java settando il flag a true
+            cancella(); //termina c++ settando il flag a true
         }
     }
 }

@@ -12,9 +12,6 @@ void Java_javacpp_cmr_com_sdkvsndk_MainActivity_cancella(JNIEnv *env, jobject ob
     flag = true;
 }
 
-jboolean Java_javacpp_cmr_com_sdkvsndk_MainActivity_visualizza(JNIEnv *env, jobject obj) {
-    return (jboolean) flag;
-}
 
 void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) {
     flag = false;
