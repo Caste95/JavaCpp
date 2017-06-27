@@ -145,10 +145,12 @@ public class MainActivity extends AppCompatActivity {
             Long[] res = new Long[2];
             switch (pos) {
                 case 0:
+                    //chiamo l'algoritmo di Fibonacci
                     res[0] = Algorithm.fibonacci(x);
                     res[1] = fibonacci(x);
                     break;
                 case 1:
+                    //chiamo l'algoritmo di calcolo matriciale
                     res[0] = Algorithm.calcMatr(x);
                     res[1] = calcMatr(x);
                     break;
@@ -170,8 +172,9 @@ public class MainActivity extends AppCompatActivity {
                     res[1] = random(in);
                     break;
                 case 5:
-                    int n = x%10;
-                    int m = (x-n)/10;
+                    //chiamo l'algoritmo di Ackermann
+                    int n = x%10;                       //genero la seconda variabile, le unità dell'input
+                    int m = (x-n)/10;                   //genero la prima variabile, le decine dell'input
                     res[0] = Algorithm.acker(m, n);
                     res[1] = acker(m, n);
                     break;
