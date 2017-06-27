@@ -18,14 +18,14 @@ import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView ris1;
-    private TextView ris2;
-    private Button go;
-    private Button plot;
+    //elementi interfaccia grafica
+    private TextView tit, desc, ris1, ris2;
+    private Button go, stop, plot;
     private EditText input, inputm, inputn;
     private ProgressBar prBar;
     //varibili di utilizzo
     private int x, y, z;
+    private long tj, tc;
     private int pos;
 
     private Worker w;
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
-        TextView tit = (TextView) findViewById(R.id.titolo);
-        TextView desc = (TextView) findViewById(R.id.desc);
+        tit = (TextView) findViewById(R.id.titolo);
+        desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
         go = (Button) findViewById(R.id.buttonGo);
-        Button stop = (Button) findViewById(R.id.buttonStop);
+        stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
         inputm = (EditText) findViewById(R.id.inputm);
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                     //chiamo l'algoritmo di Eratostene
                     in = (int) (Math.pow(10,x));
                     res[0] = Algorithm.eratostene(in);
-                    res[1] = eratostene(x);
+                    res[1] = eratostene(in);
                     break;
                 default:
                     makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
@@ -228,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Long[] res){
-            long tj = res[0];
-            long tc = res[1];
+            tj = res[0];
+            tc = res[1];
 
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
