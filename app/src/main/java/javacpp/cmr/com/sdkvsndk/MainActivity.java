@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public native void setta();
     public native boolean visualizza();
     public native long fibonacci(int n);
-    public native void calcMatr(int n);
+    public native long calcMatr(int n);
     public native long acker(int m, int n);
     public native long random(long n);
     public native long nestedLoops(int n);
@@ -145,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
             Long[] res = new Long[2];
             switch (pos) {
                 case 0:
-                    //chiamo l'algoritmo di Fibonacci
-                    //dovro farlo con un asyncTask
+                    res[0] = Algorithm.fibonacci(x);
+                    res[1] = fibonacci(x);
                     break;
                 case 1:
-                    //chiamo l'algoritmo di Prodotto Matriciale
-                    //dovro farlo con un asyncTask
+                    res[0] = Algorithm.calcMatr(x);
+                    res[1] = calcMatr(x);
                     break;
                 case 2:
                     //chiamo l'algoritmo di PrimalityTest
@@ -170,8 +170,10 @@ public class MainActivity extends AppCompatActivity {
                     res[1] = random(in);
                     break;
                 case 5:
-                    //chiamo l'algoritmo di Ackermann
-                    //dovro farlo con un asyncTask
+                    int n = x%10;
+                    int m = (x-n)/10;
+                    res[0] = Algorithm.acker(m, n);
+                    res[1] = acker(m, n);
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
