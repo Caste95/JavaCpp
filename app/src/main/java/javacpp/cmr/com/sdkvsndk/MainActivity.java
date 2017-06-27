@@ -2,11 +2,14 @@ package javacpp.cmr.com.sdkvsndk;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,14 +18,14 @@ import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView ris1;
-    private TextView ris2;
-    private Button go;
-    private Button plot;
-    private EditText input;
+    //elementi interfaccia grafica
+    private TextView tit, desc, ris1, ris2;
+    private Button go, stop, plot;
+    private EditText input, inputm, inputn;
     private ProgressBar prBar;
     //varibili di utilizzo
-    private int x;
+    private int x, y, z;
+    private long tj, tc;
     private int pos;
 
     private Worker w;
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public native boolean visualizza();
     public native long fibonacci(int n);
     public native long calcMatr(int n);
-    public native long acker(int m, int n);
+    public native long acker(long m, long n);
     public native long random(long n);
     public native long nestedLoops(int n);
     public native long eratostene(int n);
@@ -50,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
-        TextView tit = (TextView) findViewById(R.id.titolo);
-        TextView desc = (TextView) findViewById(R.id.desc);
+        tit = (TextView) findViewById(R.id.titolo);
+        desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
         go = (Button) findViewById(R.id.buttonGo);
-        Button stop = (Button) findViewById(R.id.buttonStop);
+        stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
+        inputm = (EditText) findViewById(R.id.inputm);
+        inputn = (EditText) findViewById(R.id.inputn);
         prBar = (ProgressBar) findViewById(R.id.bar);
 
         //recupero i dati passati dall'intent
@@ -65,15 +70,35 @@ public class MainActivity extends AppCompatActivity {
         desc.setText(AlgorithmView.list[pos].getDesc());
         tit.setText(AlgorithmView.list[pos].getNome());
 
+        input.setVisibility(View.VISIBLE);
+        inputm.setVisibility(View.GONE);
+        inputn.setVisibility(View.GONE);
+
+        //se scelgo ackermann utilizzo due edittext per i due parametri
+        if (pos == 5) {
+            input.setVisibility(View.GONE);
+            inputm.setVisibility(View.VISIBLE);
+            inputn.setVisibility(View.VISIBLE);
+            LinearLayout.LayoutParams param =               //setto il peso della progress bar per poterla vedere in caso ci siano 2 input
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.4f);
+            prBar.setLayoutParams(param);
+        }
+
         //La progress bar rimane visibile (PERCHÈ???)
         prBar.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    x = Integer.parseInt(input.getText().toString());
+                    if (pos != 5) {
+                        x = Integer.parseInt(input.getText().toString());
+                    }
+                    else {
+                        y = Integer.parseInt(inputm.getText().toString());
+                        z = Integer.parseInt(inputn.getText().toString());
+                    }
                     w = new Worker();
-                    w.execute((long)x);
+                    w.execute((long)x, (long)y, (long)z);
 
                 }
                 catch (Exception e){
@@ -84,16 +109,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //dentro al tasto plot lancero l'activity per la creazione del grafico
+        //dentro al tasto plot lancerò l'activity per la creazione del grafico
         plot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //lancero l'activity solo se avro un certo numero di dati da plottare
+                //lancerò l'activity solo se avrò un certo numero di dati da plottare
                 //perche se no il grafico viene male e potrebbero essere lanciate delle eccezioni
-                //in questo caso scegliamo di visualizzare solo se abbiamo piu di 5 input diversi
+                //in questo caso scegliamo di visualizzare il grafico solo se abbiamo piu di 5 input diversi
                 if(AlgorithmView.list[pos].getNumData(MainActivity.this) >= 5) {
                     Intent i = new Intent(MainActivity.this, GraphActivity.class);
-                    //gli passo la posizione che mi identifichera l'algoritmo che dovro plottare
+                    //gli passo la posizione che mi identificherà l'algoritmo che dovrò plottare
                     i.putExtra("pos", pos);
                     startActivity(i);
                 }
@@ -175,10 +200,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 5:
                     //chiamo l'algoritmo di Ackermann
-                    int n = x%10;                       //genero la seconda variabile, le unità dell'input
-                    int m = (x-n)/10;                   //genero la prima variabile, le decine dell'input
-                    res[0] = Algorithm.acker(m, n);
-                    res[1] = acker(m, n);
+                    //genero la prima variabile, le decine dell'input
+                    res[0] = Algorithm.acker(params[1], params[2]);
+                    res[1] = acker(params[1], params[2]);
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
@@ -194,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Long[] res){
-            long tj = res[0];
-            long tc = res[1];
+            tj = res[0];
+            tc = res[1];
 
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);

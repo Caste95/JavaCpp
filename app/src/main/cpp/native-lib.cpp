@@ -64,6 +64,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jin
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
+    char *v = (char*) malloc(3*n*n);
     //inizio algoritmo e prendo primo tempo
     gettimeofday(&start, NULL);
     for (i = 0; i < n; i++) {
@@ -80,6 +81,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jin
             }
         }
     }
+    free(v);
     //fine algoritmo, prendo il secondo tempo
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
@@ -142,7 +144,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, ji
 }
 
 //vero e proprio algoritmo di ackerman
-jint unacker(jint m, jint n) {
+jlong unacker(jlong m, jlong n) {
     if (m == 0) return n + 1;
     if ((m > 0) && (n == 0)) return unacker(m - 1, 1);
     if (flag) return 0;
@@ -152,7 +154,7 @@ jint unacker(jint m, jint n) {
 //misurazione del tempo di esecuzione di ackerman
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jint m, jint n) {
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong m, jlong n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
