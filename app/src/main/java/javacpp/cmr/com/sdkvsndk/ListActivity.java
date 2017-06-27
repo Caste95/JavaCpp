@@ -12,9 +12,6 @@ import java.util.HashMap;
 
 public class ListActivity extends AppCompatActivity {
 
-    //elemento lista
-    private ListView mylist;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +44,7 @@ public class ListActivity extends AppCompatActivity {
         SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(), dati, R.layout.listactivity_raw, from, to);
 
         //ora applico l'adapter
-        mylist = (ListView)findViewById(R.id.listView1);
+        ListView mylist = (ListView) findViewById(R.id.listView1);
         mylist.setAdapter(adapter);
 
         //ora faccio la lista cliccabile

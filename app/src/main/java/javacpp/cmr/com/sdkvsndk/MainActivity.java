@@ -2,11 +2,14 @@ package javacpp.cmr.com.sdkvsndk;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,16 +19,16 @@ import static android.widget.Toast.makeText;
 public class MainActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
-    private TextView desc, ris1, ris2;
+    private TextView tit, desc, ris1, ris2;
     private Button go, stop, plot;
-    private EditText input;
+    private EditText input, inputm, inputn;
     private ProgressBar prBar;
     //varibili di utilizzo
-    private int x;
+    private int x, y, z;
     private long tj, tc;
     private int pos;
 
-    Worker w;
+    private Worker w;
 
     // carico la libreria nativ-lib
     static {
@@ -37,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public native void setta();
     public native boolean visualizza();
     public native long fibonacci(int n);
-    public native void calcMatr(int n);
-    public native long acker(int m, int n);
+    public native long calcMatr(int n);
+    public native long acker(long m, long n);
     public native long random(long n);
     public native long nestedLoops(int n);
     public native long eratostene(int n);
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
+        tit = (TextView) findViewById(R.id.titolo);
         desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
@@ -57,11 +61,28 @@ public class MainActivity extends AppCompatActivity {
         stop = (Button) findViewById(R.id.buttonStop);
         plot = (Button) findViewById(R.id.buttonPlot);
         input = (EditText) findViewById(R.id.input);
+        inputm = (EditText) findViewById(R.id.inputm);
+        inputn = (EditText) findViewById(R.id.inputn);
         prBar = (ProgressBar) findViewById(R.id.bar);
 
         //recupero i dati passati dall'intent
         pos = getIntent().getIntExtra("pos", 0);
         desc.setText(AlgorithmView.list[pos].getDesc());
+        tit.setText(AlgorithmView.list[pos].getNome());
+
+        input.setVisibility(View.VISIBLE);
+        inputm.setVisibility(View.GONE);
+        inputn.setVisibility(View.GONE);
+
+        //se scelgo ackermann utilizzo due edittext per i due parametri
+        if (pos == 5) {
+            input.setVisibility(View.GONE);
+            inputm.setVisibility(View.VISIBLE);
+            inputn.setVisibility(View.VISIBLE);
+            LinearLayout.LayoutParams param =               //setto il peso della progress bar per poterla vedere in caso ci siano 2 input
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.4f);
+            prBar.setLayoutParams(param);
+        }
 
         //La progress bar rimane visibile (PERCHÈ???)
         prBar.setVisibility(View.INVISIBLE);
@@ -69,9 +90,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    x = Integer.parseInt(input.getText().toString());
+                    if (pos != 5) {
+                        x = Integer.parseInt(input.getText().toString());
+                    }
+                    else {
+                        y = Integer.parseInt(inputm.getText().toString());
+                        z = Integer.parseInt(inputn.getText().toString());
+                    }
                     w = new Worker();
-                    w.execute((long)x);
+                    w.execute((long)x, (long)y, (long)z);
 
                 }
                 catch (Exception e){
@@ -82,16 +109,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //dentro al tasto plot lancero l'activity per la creazione del grafico
+        //dentro al tasto plot lancerò l'activity per la creazione del grafico
         plot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //lancero l'activity solo se avro un certo numero di dati da plottare
+                //lancerò l'activity solo se avrò un certo numero di dati da plottare
                 //perche se no il grafico viene male e potrebbero essere lanciate delle eccezioni
-                //in questo caso scegliamo di visualizzare solo se abbiamo piu di 5 input diversi
+                //in questo caso scegliamo di visualizzare il grafico solo se abbiamo piu di 5 input diversi
                 if(AlgorithmView.list[pos].getNumData(MainActivity.this) >= 5) {
                     Intent i = new Intent(MainActivity.this, GraphActivity.class);
-                    //gli passo la posizione che mi identifichera l'algoritmo che dovro plottare
+                    //gli passo la posizione che mi identificherà l'algoritmo che dovrò plottare
                     i.putExtra("pos", pos);
                     startActivity(i);
                 }
@@ -143,29 +170,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Long[] doInBackground(Long... params) {
             Long[] res = new Long[2];
-            res[0] = res[1] = -1L;
-            int in;
             switch (pos) {
                 case 0:
                     //chiamo l'algoritmo di Fibonacci
-                    //dovro farlo con un asyncTask
+                    res[0] = Algorithm.fibonacci(x);
+                    res[1] = fibonacci(x);
                     break;
                 case 1:
-                    //chiamo l'algoritmo di Prodotto Matriciale
-                    //dovro farlo con un asyncTask
-
+                    //chiamo l'algoritmo di calcolo matriciale
+                    res[0] = Algorithm.calcMatr(x);
+                    res[1] = calcMatr(x);
                     break;
                 case 2:
                     //chiamo l'algoritmo di PrimalityTest
-                    long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
-                            2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
-                    if(x < primes.length && x >= 1){
-                        res[0] = Algorithm.primalityTest(primes[x - 1]);
-                        res[1] = primalityTest(primes[x - 1]);
-                    }else{
-                        Toast.makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_SHORT);
-                        //terminate();
-                    }
+                    res[0] = Algorithm.primalityTest(x);
+                    res[1] = primalityTest(x);
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop
@@ -175,23 +194,23 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 4:
                     //chiamo l'algoritmo di Numeri Casuali
-                    in = (int) (x * Math.pow(10, 6));
+                    int in = (int) (x * Math.pow(10, 6));
                     res[0] = Algorithm.random(in);
                     res[1] = random(in);
                     break;
                 case 5:
                     //chiamo l'algoritmo di Ackermann
-                    //dovro farlo con un asyncTask
+                    //genero la prima variabile, le decine dell'input
+                    res[0] = Algorithm.acker(params[1], params[2]);
+                    res[1] = acker(params[1], params[2]);
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
-                    in = (int) (Math.pow(10, x));
-                    res[0] = Algorithm.eratostene(in);
-                    res[1] = eratostene(in);
+                    res[0] = Algorithm.eratostene(x);
+                    res[1] = eratostene(x);
                     break;
-                default: //non dovrebbe mai essere chiamato
+                default:
                     makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
-                    //terminate();
                     break;
             }
             return res;
