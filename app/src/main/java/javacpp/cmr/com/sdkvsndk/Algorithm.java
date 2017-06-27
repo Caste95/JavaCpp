@@ -5,6 +5,10 @@ public class Algorithm {
     //flag per permettere l'uscita dell'algoritmo in caso in cui sia stato premuto su stop
     private static boolean flag = false;
 
+/*
+* Tutti gli algoritmi ritorneranno -1 quando stoppati, il risultato non verrà comunque elaborato
+*/
+
     //metodi per accedere al flag
     public static void cancella(){
         flag = true;
@@ -12,10 +16,6 @@ public class Algorithm {
 
     public static void setta(){
         flag = false;
-    }
-
-    public static boolean visualizza(){
-        return flag;
     }
 
     /*Generazione di sequenze di numeri casuali

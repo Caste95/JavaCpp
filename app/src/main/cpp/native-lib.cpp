@@ -6,13 +6,17 @@
 //variabile per stoppare l'algoritmo nell asynctask
 bool flag = false;
 
+/*
+* Tutti gli algoritmi ritorneranno -1 quando stoppati, il risultato non verrà comunque elaborato
+*/
+
 extern "C" {
-//metodi per accedere alla viariabile booleana
+//setta il flag per interrompere i cicli
 void Java_javacpp_cmr_com_sdkvsndk_MainActivity_cancella(JNIEnv *env, jobject obj) {
     flag = true;
 }
 
-
+//ripristina il flag
 void Java_javacpp_cmr_com_sdkvsndk_MainActivity_setta(JNIEnv *env, jobject obj) {
     flag = false;
 }
@@ -104,7 +108,6 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject 
 }
 
 //algoritmo di prodotto di due matrici
-
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
@@ -174,6 +177,7 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_eratostene(JNIEnv *env, jobject
         }
     /*
      * You can verify the correctness of the algorithm by uncomment the code below
+     * and adding #include <android/log.h>
     */
     //int c = 0; for(int i = 0; i <= r; i++) if(v[i]) c++;
     //__android_log_print(ANDROID_LOG_INFO,"C++ Eratostene\'s sieve","There are %d prime numbers",c);
@@ -199,6 +203,7 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
 
     /*
      * You can verify the correctness of the algorithm by uncomment the code below
+     * and adding #include <android/log.h>
     */
     /*
     if (prime) { //TODO: Chiedere al tutor perchè non stampa long long -.-
