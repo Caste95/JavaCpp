@@ -126,17 +126,22 @@ public class Algorithm {
     }
 
     //vero e proprio algoritmo di ackerman
-    private static int acker(int m, int n) {
+    private static long unacker(long m, long n) {
         if (m == 0) return n + 1;
-        if ((m > 0) && (n == 0)) return acker(m - 1, 1);
+        if ((m > 0) && (n == 0)) return unacker(m - 1, 1);
         if(flag) return 0;
-        else return acker(m - 1, acker(m, n - 1));
+        else return unacker(m - 1, unacker(m, n - 1));
     }
 
-    /*
-     *ATTENZIONE
-     *manca il metodo per misurare il tempo dell'algoritmo di ackerman
-     */
+    //incapsulamento di ackermann per la misura del tempo
+    public static long acker(long m, long n) {
+        long start, end;            //per il tempo
+        start = System.currentTimeMillis(); //primo tempo
+        unacker(m, n);
+        //fine algoritmo
+        end = System.currentTimeMillis(); //secondo tempo
+        return (end - start);
+    }
 
 
     public static long primalityTest(long n) {

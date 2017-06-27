@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Long[] doInBackground(Long... params) {
             Long[] res = new Long[2];
+            int in;
             switch (pos) {
                 case 0:
                     //chiamo l'algoritmo di Fibonacci
@@ -183,8 +184,16 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     //chiamo l'algoritmo di PrimalityTest
-                    res[0] = Algorithm.primalityTest(x);
-                    res[1] = primalityTest(x);
+                    long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
+                            2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
+                    if(x < primes.length && x >= 1){
+                        res[0] = Algorithm.primalityTest(primes[x - 1]);
+                        res[1] = primalityTest(primes[x - 1]);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_SHORT);
+                        //terminate();
+                    }
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop
@@ -194,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 4:
                     //chiamo l'algoritmo di Numeri Casuali
-                    int in = (int) (x * Math.pow(10, 6));
+                    in = (int) (x * Math.pow(10, 6));
                     res[0] = Algorithm.random(in);
                     res[1] = random(in);
                     break;
@@ -206,7 +215,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
-                    res[0] = Algorithm.eratostene(x);
+                    in = (int) (Math.pow(10,x));
+                    res[0] = Algorithm.eratostene(in);
                     res[1] = eratostene(x);
                     break;
                 default:
