@@ -18,7 +18,7 @@ import android.provider.BaseColumns;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-public class AlgorithmView {
+class AlgorithmView {
 
     //variabile statica per l'incremento degli id
     private static int id_counter = 0;
@@ -60,7 +60,7 @@ public class AlgorithmView {
 
     //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
     //il giusto valore dal db
-    public long getEsec(Context c) {
+    long getEsec(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in c fatta
@@ -89,7 +89,7 @@ public class AlgorithmView {
 
     //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
     //il giusto valore dal db
-    public long getEsej(Context c) {
+    long getEsej(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in java fatta
@@ -116,17 +116,17 @@ public class AlgorithmView {
         return esej;
     }
 
-    public int getTipo() {
+    int getTipo() {
         return tipo;
     }
 
-    public int getNome() {
+    int getNome() {
         return nome;
     }
 
     //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
     //il giusto valore dal db
-    public int getInput(Context c) {
+    int getInput(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultimo input usato
@@ -154,7 +154,7 @@ public class AlgorithmView {
     }
 
     //funzione per l'aggiornamento dei dati nel db
-    public void updateDB(Context c, int input, long tc, long tj){
+    void updateDB(Context c, int input, long tc, long tj){
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         ContentValues v = new ContentValues();
@@ -167,7 +167,7 @@ public class AlgorithmView {
     }
 
     //funzione per ricevere la LineGraphSeries che serve per plottare il grafico della funzione
-    public LineGraphSeries<DataPoint> getSeriesC(Context c) {
+    LineGraphSeries<DataPoint> getSeriesC(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati per fare il grafico
@@ -200,7 +200,7 @@ public class AlgorithmView {
     }
 
     //funzione per ricevere la LineGraphSeries che serve per plottare il grafico della funzione
-    public LineGraphSeries<DataPoint> getSeriesJava(Context c) {
+    LineGraphSeries<DataPoint> getSeriesJava(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara tutti i dati per fare il grafico
@@ -232,7 +232,7 @@ public class AlgorithmView {
     //funzione che mi resitituisce quanti righe di imput diverse ho che mi serve per fare il controllo
     //prima di fare ls stampa del grafico
     //in teoria non servirebbe fare anche la media ma messa per sicurezza
-    public int getNumData(Context c){
+    int getNumData(Context c){
         int n;
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
@@ -255,7 +255,7 @@ public class AlgorithmView {
     //funzione che dato in ingresso il contesto e il numero di input mi trova tutti i dati
     //prodotti da quell'input per quel specifico algoritmo
     //mi restituisce una matrice con la prima colonna i dati in c e la seconda in java
-    public int[][] getData(Context c, int input){
+    int[][] getData(Context c, int input){
         int n;
         int x[][] = null;
         oh = new DBOpenHelper(c);
@@ -282,7 +282,7 @@ public class AlgorithmView {
     }
 
     //prova
-    public static final AlgorithmView[] list = new AlgorithmView[]{
+    static final AlgorithmView[] list = new AlgorithmView[]{
             new AlgorithmView(R.string.fib, R.string.cpu, R.string.fibd),
             new AlgorithmView(R.string.mat, R.string.memory, R.string.matd),
             new AlgorithmView(R.string.prim, R.string.cpu, R.string.primd),
