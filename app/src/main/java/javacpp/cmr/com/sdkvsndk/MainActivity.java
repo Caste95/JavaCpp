@@ -24,9 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText input, inputm, inputn;
     private ProgressBar prBar;
     //varibili di utilizzo
-    private int x, y, z;
+    private int x;
+    private int y;
+    private int z;
     private long tj, tc;
     private int pos;
+
+    private final long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
+            2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
 
     private Worker w;
 
@@ -90,19 +95,56 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if (pos != 5) {
-                        x = Integer.parseInt(input.getText().toString());
-                    }
-                    else {
+                    //ackermann richiede due valori di input
+                    if (pos == 5) {
                         y = Integer.parseInt(inputm.getText().toString());
                         z = Integer.parseInt(inputn.getText().toString());
+
                     }
+                    else {
+                        x = Integer.parseInt(input.getText().toString());
+                    }
+
+                    //verifica dell'input
+                    switch(pos){
+                        case 0: //fibonacci
+                            if(false)
+                                throw new Exception();
+                            break;
+                        case 1: //prodotto matriciale
+                            if(x >= 300)
+                                throw new Exception();
+                            break;
+                        case 2: //PrimalityTest
+                            if ((x >= primes.length) || (x < 1)) {
+                                throw new Exception();
+                            }
+                            break;
+                        case 3: //NestedLoop
+                            if(false)
+                                throw new Exception();
+                            break;
+                        case 4: //numeri casuali
+                            if(false)
+                                throw new Exception();
+                            break;
+                        case 5://Ackermann
+                            if(y > 4)
+                                throw new Exception();
+                            break;
+                        case 6: //Crivello di Eratostene
+                            if(x > 8)
+                                throw new Exception();
+                            break;
+
+                    }
+
                     w = new Worker();
-                    w.execute((long)x, (long)y, (long)z);
+                    w.execute(x,  y,  z); //solo ackermann considera gli ultimi due parametri
 
                 }
                 catch (Exception e){
-                    makeText(MainActivity.this, R.string.toast, Toast.LENGTH_LONG).show();
+                    makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_LONG).show();
                     ris1.setText(R.string.outputjava);
                     ris2.setText(R.string.outputcpp);
                 }
@@ -156,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private class Worker extends AsyncTask<Long, Void, Long[]>{
+    private class Worker extends AsyncTask<Integer, Void, Long[]>{
 
         @Override
         protected void onPreExecute(){
@@ -168,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Long[] doInBackground(Long... params) {
+        protected Long[] doInBackground(Integer... params) {
             Long[] res = new Long[2];
             int in;
             switch (pos) {
@@ -183,17 +225,8 @@ public class MainActivity extends AppCompatActivity {
                     res[1] = calcMatr(x);
                     break;
                 case 2:
-                    //chiamo l'algoritmo di PrimalityTest
-                    long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
-                            2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
-                    if(x < primes.length && x >= 1){
-                        res[0] = Algorithm.primalityTest(primes[x - 1]);
-                        res[1] = primalityTest(primes[x - 1]);
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_SHORT);
-                        //terminate();
-                    }
+                    res[0] = Algorithm.primalityTest(primes[params[0] -1]);
+                    res[1] = primalityTest(primes[params[0] -1]);
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop
@@ -219,8 +252,7 @@ public class MainActivity extends AppCompatActivity {
                     res[0] = Algorithm.eratostene(in);
                     res[1] = eratostene(in);
                     break;
-                default:
-                    makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
+                default: //non verrà mai chiamato
                     break;
             }
             return res;
@@ -242,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
             AlgorithmView.list[pos].updateDB(MainActivity.this, x, tc, tj);
         }
 
-        //Eseguito DOPO doInBackground() ---> creo un altro metodo per cancellare il task
+        //Eseguito DOPO doInBackground() ---> creo un altro metodo per cancellare il task: terminate()
         @Override
         protected void onCancelled(){
             prBar.setVisibility(View.INVISIBLE);
@@ -255,9 +287,9 @@ public class MainActivity extends AppCompatActivity {
 
         //termina il più velocemente possibile il task
         public void terminate(){
-            cancel(true);
-            Algorithm.cancella();
-            cancella();
+            cancel(true); //cancella il task, non potrà più essere eseguito
+            Algorithm.cancella(); //termina java
+            cancella(); //termina c++
         }
     }
 }
