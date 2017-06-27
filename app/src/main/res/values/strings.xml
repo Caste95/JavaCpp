@@ -15,7 +15,7 @@
     <string name="ack">Ackermann</string>
     <string name="loop">NestedLoops</string>
     <string name="era">Crivello di Eratostene</string>
-    <string name="fibd">Descrizione algoritmo Fibonacci</string>
+    <string name="fibd">F[n] = 0 se n = 0\nF[n] = 1 se n = 1\nF[n] = F[n-1] + F[n-1] altrimenti</string>
     <string name="casd">Descrizione algoritmo Numeri Casuali</string>
     <string name="matd">Descrizione algoritmo Prodotto Matriciale</string>
     <string name="primd">Descrizione algoritmo Numeri Primi</string>
