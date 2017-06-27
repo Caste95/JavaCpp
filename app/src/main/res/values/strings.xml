@@ -38,4 +38,5 @@
     <string name="secondaparte">java:</string>
     <string name="terzaparte">Input:</string>
     <string name="zero">0</string>
+    <string name="canc">Algoritmo stoppato!</string>
 </resources>

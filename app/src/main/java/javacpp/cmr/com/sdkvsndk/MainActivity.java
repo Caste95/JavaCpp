@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.widget.Toast.makeText;
+
 public class MainActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 catch (Exception e){
-                    Toast.makeText(MainActivity.this, R.string.toast, Toast.LENGTH_LONG).show();
+                    makeText(MainActivity.this, R.string.toast, Toast.LENGTH_LONG).show();
                     ris1.setText(R.string.outputjava);
                     ris2.setText(R.string.outputcpp);
                 }
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     //altrimenti stampo un toast di errore
-                    Toast.makeText(MainActivity.this, R.string.toastPlot, Toast.LENGTH_LONG).show();
+                    makeText(MainActivity.this, R.string.toastPlot, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -131,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute(){
+            go.setVisibility(View.INVISIBLE);
+            plot.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.VISIBLE);
             Algorithm.setta();
             setta();
@@ -175,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     res[1] = eratostene(x);
                     break;
                 default:
-                    Toast.makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
+                    makeText(MainActivity.this, R.string.toastError, Toast.LENGTH_LONG).show();
                     break;
             }
             return res;
@@ -185,7 +189,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Long[] res){
             tj = res[0];
             tc = res[1];
+
             prBar.setVisibility(View.INVISIBLE);
+            go.setVisibility(View.VISIBLE);
+            plot.setVisibility(View.VISIBLE);
+
             ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
             ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
 
@@ -197,6 +205,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onCancelled(){
             prBar.setVisibility(View.INVISIBLE);
+            go.setVisibility(View.INVISIBLE);
+            plot.setVisibility(View.INVISIBLE);
+            Toast.makeText(MainActivity.this, R.string.canc, Toast.LENGTH_SHORT).show();
+            go.setVisibility(View.VISIBLE);
+            plot.setVisibility(View.VISIBLE);
         }
 
         //termina il più velocemente possibile il task
