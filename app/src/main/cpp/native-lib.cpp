@@ -64,6 +64,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jin
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
+    char *v = (char*) malloc(3*n*n);
     //inizio algoritmo e prendo primo tempo
     gettimeofday(&start, NULL);
     for (i = 0; i < n; i++) {
@@ -80,6 +81,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobject, jin
             }
         }
     }
+    free(v);
     //fine algoritmo, prendo il secondo tempo
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
