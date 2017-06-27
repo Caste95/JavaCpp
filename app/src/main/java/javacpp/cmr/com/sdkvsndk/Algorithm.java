@@ -126,7 +126,7 @@ class Algorithm {
     }
 
     //vero e proprio algoritmo di ackerman
-    private static int unacker(int m, int n) {
+    private static long unacker(long m, long n) {
         if (m == 0) return n + 1;
         if ((m > 0) && (n == 0)) return unacker(m - 1, 1);
         if(flag) return 0;
@@ -134,7 +134,7 @@ class Algorithm {
     }
 
     //incapsulamento di acker per la misura del tempo
-    static long acker(int m, int n) {
+    static long acker(long m, long n) {
         long start, end;            //per il tempo
         start = System.currentTimeMillis(); //primo tempo
         unacker(m, n);
