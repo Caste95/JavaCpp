@@ -16,7 +16,7 @@ import static android.widget.Toast.makeText;
 public class MainActivity extends AppCompatActivity {
 
     //elementi interfaccia grafica
-    private TextView desc, ris1, ris2;
+    private TextView tit, desc, ris1, ris2;
     private Button go, stop, plot;
     private EditText input;
     private ProgressBar prBar;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private long tj, tc;
     private int pos;
 
-    Worker w;
+    private Worker w;
 
     // carico la libreria nativ-lib
     static {
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //prendo gli id dell'interfaccia
+        tit = (TextView) findViewById(R.id.titolo);
         desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //recupero i dati passati dall'intent
         pos = getIntent().getIntExtra("pos", 0);
         desc.setText(AlgorithmView.list[pos].getDesc());
+        tit.setText(AlgorithmView.list[pos].getNome());
 
         //La progress bar rimane visibile (PERCHÈ???)
         prBar.setVisibility(View.INVISIBLE);
