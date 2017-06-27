@@ -143,7 +143,7 @@ Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, ji
 }
 
 //vero e proprio algoritmo di ackerman
-jint unacker(jint m, jint n) {
+jlong unacker(jlong m, jlong n) {
     if (m == 0) return n + 1;
     if ((m > 0) && (n == 0)) return unacker(m - 1, 1);
     if (flag) return 0;
@@ -153,7 +153,7 @@ jint unacker(jint m, jint n) {
 //misurazione del tempo di esecuzione di ackerman
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jint m, jint n) {
+Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong m, jlong n) {
     timeval start, stop;
     long long t;
     gettimeofday(&start, NULL);
