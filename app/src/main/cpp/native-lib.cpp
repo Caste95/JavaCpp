@@ -2,7 +2,6 @@
 #include <string>
 #include <stdlib.h>
 #include <cmath>
-#include <android/log.h>
 
 //variabile per stoppare l'algoritmo nell asynctask
 bool flag = false;
