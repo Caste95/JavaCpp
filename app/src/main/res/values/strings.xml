@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JavaVsCC++</string>
+    <string name="app_name">JDKvsNDK</string>
     <string name="outputjava">Output Java</string>
     <string name="outputcpp">Output C++</string>
     <string name="buttonGo">GO</string>

@@ -208,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
             stop.setVisibility(View.VISIBLE);
             ris1.setText(R.string.outputjava);
             ris2.setText(R.string.outputcpp);
+
+            if(pos == 5){
+                inputm.setEnabled(false);
+                inputn.setEnabled(false);
+            }else input.setEnabled(false);
             //setto i flag a false permettendo la normale esecuzione degli algoritmi
             Algorithm.setta();
             setta();
@@ -275,6 +280,11 @@ public class MainActivity extends AppCompatActivity {
             plot.setVisibility(View.VISIBLE);
             stop.setVisibility(View.INVISIBLE);
 
+            if(pos == 5){
+                inputm.setEnabled(true);
+                inputn.setEnabled(true);
+            }else input.setEnabled(true);
+
             ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
             ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
 
@@ -290,6 +300,11 @@ public class MainActivity extends AppCompatActivity {
             stop.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
+            if(pos == 5){
+                inputm.setEnabled(true);
+                inputn.setEnabled(true);
+            }else input.setEnabled(true);
+
 
         }
 
