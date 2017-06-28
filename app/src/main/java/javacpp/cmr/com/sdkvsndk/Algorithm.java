@@ -148,7 +148,8 @@ class Algorithm {
         long s = System.currentTimeMillis();
 
         boolean prime = true;
-        for(int i=2; i < Math.sqrt(n) && prime; i++) {
+        long sr = (long) Math.sqrt(n); //il compilatore java ottimizza già il codice, ma lo rendo esplicito
+        for(long i=2; i < sr && prime; i++) {
             if(flag) return -1;
             if (n % i == 0)
                 prime = false;

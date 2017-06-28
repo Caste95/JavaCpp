@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <cmath>
 
+
 //variabile per stoppare l'algoritmo nell asynctask
 bool flag = false;
 
@@ -210,7 +211,10 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
     gettimeofday(&start, NULL);
 
     bool prime = true;
-    for (jlong i = 2; i < sqrt(r) && prime; i++) {
+    //il compilatore non riesce a ottimizzare il codice, allora lo faccio io
+    // veniva calcolata la sqrt ad ogni iterazione che è un overhead MICIDIALE
+    unsigned long long sr = (unsigned long long) sqrt(r);
+    for (long long i = 2; i < sr && prime; i++) {
         if (flag) return -1;
         if (r % i == 0) prime = false;
     }
@@ -219,13 +223,13 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
      * You can verify the correctness of the algorithm by uncomment the code below
      * and adding #include <android/log.h>
     */
-    /*
-    if (prime) { //TODO: Chiedere al tutor perchè non stampa long long -.-
-        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is prime", (long long) r);
+/*
+    if (prime) { //TODO il debugger mi mostra r negativo ma logcat me lo stampa correttamente
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is prime", (unsigned long long) r);
     } else {
-        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%ld is not prime", (long long) r);
+        __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is not prime", (unsigned long long)r);
     }
-    */
+*/
 
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
