@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 5:
                             //Ackermann
-                            if(y > 4 || ((y == 4) && z > 0)) //TODO: Crasha quasi sempre, non so come limitare l'input by Enrico
+                            if(y > 4 || (((y == 4) && z > 0) || z > 10)) //TODO: Crasha quasi sempre, non so come limitare l'input by Enrico
                                 throw new Exception();
                             break;
                         case 6:
