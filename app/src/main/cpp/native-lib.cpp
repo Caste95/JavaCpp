@@ -153,7 +153,7 @@ jlong unacker(jlong m, jlong n) {
 //misurazione del tempo di esecuzione di ackerman
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_acker(JNIEnv *env, jobject obj, jlong m, jlong n) {
     timeval start, stop;
-    long long t;
+    unsigned long long t;
     gettimeofday(&start, NULL);
     unacker(m, n);
     gettimeofday(&stop, NULL);

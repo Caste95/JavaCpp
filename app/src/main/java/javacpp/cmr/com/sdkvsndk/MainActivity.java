@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         inputm.setVisibility(View.GONE);
         inputn.setVisibility(View.GONE);
 
-        stop.setVisibility(View.VISIBLE);
+        stop.setVisibility(View.INVISIBLE);
 
         //se scelgo ackermann utilizzo due edittext per i due parametri
         if (pos == 5) {
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                stop.setVisibility(View.VISIBLE);
                 try {
                     //ackermann richiede due valori di input
                     if (pos == 5) {
@@ -121,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
                                 throw new Exception();
                             break;
                         case 2: //PrimalityTest
-                            if ((x >= primes.length) || (x < 1)) {
+                            if ((x > primes.length) || (x < 1)) {
                                 throw new Exception();
-                            }
+                            } else Toast.makeText(MainActivity.this, String.valueOf(primes[x-1]), Toast.LENGTH_SHORT).show();
                             break;
                         case 3: //NestedLoop
                             if(false)
@@ -214,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute(){
+            stop.setVisibility(View.VISIBLE);
             go.setVisibility(View.INVISIBLE);
             plot.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.VISIBLE);
