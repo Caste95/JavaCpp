@@ -1,6 +1,6 @@
 package javacpp.cmr.com.sdkvsndk;
 
-import static javacpp.cmr.com.sdkvsndk.AlgorithmView.primes;
+import static javacpp.cmr.com.sdkvsndk.Algorithm.PRIMES;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -112,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 2:
                             //PrimalityTest
-                            if ((x > primes.length) || (x < 1)) {
+                            if ((x > PRIMES.length) || (x < 1)) {
                                 throw new Exception();
-                            }else Toast.makeText(MainActivity.this,getString(R.string.primeinfo) + " " + String.valueOf(primes[x-1]),Toast.LENGTH_SHORT).show();
+                            }else Toast.makeText(MainActivity.this,getString(R.string.primeinfo) + " " + String.valueOf(PRIMES[x-1]),Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             //NestedLoop: non da problemi di crash applicativi
@@ -237,8 +237,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     //chiamo l'algoritmo dei numeri primi
-                    res[0] = Algorithm.primalityTest(primes[params[0] -1]);
-                    res[1] = primalityTest(primes[params[0] -1]);
+                    res[0] = Algorithm.primalityTest(PRIMES[params[0] -1]);
+                    res[1] = primalityTest(PRIMES[params[0] -1]);
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop

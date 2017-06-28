@@ -291,28 +291,5 @@ class AlgorithmView {
             new AlgorithmView(R.string.era, R.string.cpu, R.string.arad)
     };
 
-    //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
-    //variabile contenente i numeri primi per l'algoritmo primalitytest
-    static final long[] primes = {
-            7,
-            97,
-            773,
-            5113,
-            54673L,
-            633797L,
-            9139397L,
-            34542467L,
-            359454547L,
-            2331891997L,
-            16333396997L,
-            297564326947L,
-            2456435675347L,
-            37267627626947L,
-            726483934563467L,
-            9573357564326947L,
-            75136938367986197L,
-            165678739293946997L,
-            1276812967623946997L
-    };
 
 }
