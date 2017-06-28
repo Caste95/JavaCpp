@@ -77,14 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
         //se scelgo ackermann utilizzo due edittext per i due parametri
         if (pos == 5) {
-            plot.setVisibility(View.INVISIBLE); //Ackermann non si può plottare
             input.setVisibility(View.GONE);
             inputm.setVisibility(View.VISIBLE);
             inputn.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams param =               //setto il peso della progress bar per poterla vedere in caso ci siano 2 input
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.4f);
             prBar.setLayoutParams(param);
-        }else plot.setVisibility(View.VISIBLE);
+        }
 
         //TODO: Chiedere al tutor perchè la progress bar rimane visibile
         prBar.setVisibility(View.INVISIBLE);
@@ -247,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
                     //chiamo l'algoritmo di Ackermann
                     res[0] = Algorithm.acker(params[1], params[2]);
                     res[1] = acker(params[1], params[2]);
+                    x = y*10+z;
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
