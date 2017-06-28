@@ -43,6 +43,7 @@
             android:layout_height="match_parent"
             android:inputType="number"
             android:layout_weight="1.3"/>
+
         <EditText
             android:id="@+id/inputn"
             android:layout_width="match_parent"
