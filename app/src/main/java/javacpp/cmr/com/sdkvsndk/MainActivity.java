@@ -270,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
+            stop.setVisibility(View.INVISIBLE);
 
             ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
             ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
@@ -286,6 +287,8 @@ public class MainActivity extends AppCompatActivity {
             stop.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
+            ris1.setText(R.string.outputjava);
+            ris2.setText(R.string.outputcpp);
         }
 
         //termina il più velocemente possibile il task
