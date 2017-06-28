@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         //se scelgo ackermann utilizzo due edittext per i due parametri
         if (pos == 5) {
-            //plot.setVisibility(View.INVISIBLE); //Ackermann non si può plottare
+            //plot.setVisibility(View.INVISIBLE);
             input.setVisibility(View.GONE);
             inputm.setVisibility(View.VISIBLE);
             inputn.setVisibility(View.VISIBLE);
