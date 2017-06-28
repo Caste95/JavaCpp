@@ -13,7 +13,7 @@
     <string name="ack">Ackermann</string>
     <string name="loop">NestedLoops</string>
     <string name="era">Crivello di Eratostene</string>
-    <string name="fibd">F[n] = 0 se n = 0\nF[n] = 1 se n = 1\nF[n] = F[n-1] + F[n-1] altrimenti\nInserire un numero n non troppo alto</string>
+    <string name="fibd">F[n] = 0 se n = 0\nF[n] = 1 se n = 1\nF[n] = F[n-1] + F[n-2] altrimenti\nInserire un numero n non troppo alto</string>
     <string name="casd">Genera un array di numeri casuali di dimensione n moltiplicato per 10^6</string>
     <string name="matd">Crea e moltiplica tra di loro due matrici quadrate di ordine n</string>
     <string name="primd">Verifica che un numero prefissato di n cifre sia primo\nn compreso tra 1 e 19 inclusi</string>
