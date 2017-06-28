@@ -62,7 +62,6 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobjec
     int i, j, k, l, r, p; //contatori dei cicli
     timeval start, stop;
     long long t;
-    char *v = (char*) malloc(3*n*n);
     //inizio algoritmo e prendo primo tempo
     gettimeofday(&start, NULL);
     for (i = 0; i < n; i++) {
@@ -79,7 +78,6 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_nestedLoops(JNIEnv *env, jobjec
             }
         }
     }
-    free(v);
     //fine algoritmo, prendo il secondo tempo
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
@@ -111,31 +109,42 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_fibonacci(JNIEnv *env, jobject 
 jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_calcMatr(JNIEnv *env, jobject obj, jint n) {
     timeval start, stop;
     long long t;
+    int i, j, l;
+    int **mat1;
+    int **mat2;
+    int **ris;
     //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
     gettimeofday(&start, NULL);
-    char *v = (char*) malloc((size_t)3*n*n*4);
-    int fatt1[n][n];
-    int fatt2[n][n];
-    int ris[n][n];
-    fatt1[0][0]=(int)v[0];
-    fatt2[0][0]=(int)v[0]+(4*n*n);
-    ris[0][0]=(int)v[0]+(2*4*n*n);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (flag) return -1;
-            fatt1[i][j] = rand() % 100;
-            fatt2[i][j] = rand() % 100;
+    //usiamo la malloc perche con l'inizializzazzione classica android fa un po' di casino con la dimensione
+    //delle variabili e quindi non alloca tutta la matrice
+    mat1 = (int**) malloc(n * sizeof(int));
+    mat2 = (int**) malloc(n * sizeof(int));
+    ris = (int**) malloc(n * sizeof(int));
+    for(i = 0; i < n; i++){
+        mat1 [i] = ( int *) malloc ( n * sizeof ( int ));
+        mat2 [i] = ( int *) malloc ( n * sizeof ( int ));
+        ris [i] = ( int *) malloc ( n * sizeof ( int ));
+    }
+    srand((unsigned int) time(NULL));
+    for (i = 0; i < (long)n; i++) {
+        for (j = 0; j < (long)n; j++) {
+            if(flag) return -1;
+            mat1[i][j] = (rand() % 100);
+            mat2[i][j] = (rand() % 100);
         }
     }
-    for (int j = 0; j < n; j++) {
-        for (int i = 0; i < n; i++) {
-            for (int l = 0; l < n; l++) {
+    for (j = 0; j < (long)n; j++) {
+        for (i = 0; i < (long)n; i++) {
+            for (l = 0; l < (long)n; l++) {
                 if (flag) return -1;
-                ris[i][j] += fatt1[l][j] * fatt2[i][l];
+                ris[i][j] += mat1[l][j] * mat2[i][l];
             }
         }
     }
-    free(v);
+    free(mat1);
+    free(mat2);
+    free(ris);
+    //fine algoritmo e prendiamo secondo tempo
     gettimeofday(&stop, NULL);
     t = (stop.tv_sec - start.tv_sec) * 1000;
     t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);

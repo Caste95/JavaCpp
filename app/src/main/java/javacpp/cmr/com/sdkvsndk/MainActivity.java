@@ -2,19 +2,15 @@ package javacpp.cmr.com.sdkvsndk;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,44 +103,40 @@ public class MainActivity extends AppCompatActivity {
 
                     //verifica dell'input
                     switch(pos){
-                        case 0: //fibonacci
-                            if(false)
-                                throw new Exception();
+                        case 0:
+                            //fibonacci: non da problemi di crash applicativi
                             break;
-                        case 1: //prodotto matriciale
-                            if(x >= 290)
-                                throw new Exception();
+                        case 1:
+                            //prodotto matriciale: non da problemi di crash applicativi
                             break;
-                        case 2: //PrimalityTest
+                        case 2:
+                            //PrimalityTest
                             if ((x >= primes.length) || (x < 1)) {
                                 throw new Exception();
                             }
                             break;
-                        case 3: //NestedLoop
-                            if(false)
-                                throw new Exception();
+                        case 3:
+                            //NestedLoop: non da problemi di crash applicativi
                             break;
-                        case 4: //numeri casuali
-                            if(false)
-                                throw new Exception();
+                        case 4:
+                            //numeri casuali: non da problemi di crash applicativi
                             break;
                         case 5://Ackermann
                             if(y > 4 || ((y == 4) && z > 0)) //TODO: Crasha quasi sempre, non so come limitare l'input by Enrico
                                 throw new Exception();
                             break;
-                        case 6: //Crivello di Eratostene
+                        case 6:
+                            //Crivello di Eratostene
                             if(x > 8)
                                 throw new Exception();
                             break;
-
                     }
-
+                    //lanciamo l'asynctask
                     w = new Worker();
                     w.execute(x,  y,  z); //solo ackermann considera gli ultimi due parametri
-
                 }
                 catch (Exception e){
-                    makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_LONG).show();
                     ris1.setText(R.string.outputjava);
                     ris2.setText(R.string.outputcpp);
                 }
@@ -166,11 +158,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     //altrimenti stampo un toast di errore
-                    makeText(MainActivity.this, R.string.toastPlot, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.toastPlot, Toast.LENGTH_LONG).show();
                 }
             }
         });
 
+        //stoppiamo l'asynctask
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause(){
         super.onPause();
-
         //termina il task
         if(w != null && !w.isCancelled())
             w.terminate();
@@ -197,10 +189,9 @@ public class MainActivity extends AppCompatActivity {
         //termina il task
         if(w !=null && !w.isCancelled())
             w.terminate();
-
         Intent i = new Intent( this, ListActivity.class);
         startActivity(i);
-        //scelgo di distruggerla perche se faccio back nell'activiti principale probabilmente
+        //scelgo di distruggerla perche se faccio back nell'activity principale probabilmente
         //voglio chiuderla e non tornare all'activity dell'esecuzione dell'algoritmo
         finish();
     }
@@ -236,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     res[1] = calcMatr(x);
                     break;
                 case 2:
+                    //chiamo l'algoritmo dei numeri primi
                     res[0] = Algorithm.primalityTest(primes[params[0] -1]);
                     res[1] = primalityTest(primes[params[0] -1]);
                     break;
@@ -252,13 +244,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 5:
                     //chiamo l'algoritmo di Ackermann
-                    //genero la prima variabile, le decine dell'input
                     res[0] = Algorithm.acker(params[1], params[2]);
                     res[1] = acker(params[1], params[2]);
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
-                    in = (int) (Math.pow(10,x));
+                    in = (int) (Math.pow(10, x));
                     res[0] = Algorithm.eratostene(in);
                     res[1] = eratostene(in);
                     break;
@@ -297,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //termina il più velocemente possibile il task
-        public void terminate(){
+        private void terminate(){
             cancel(true); //cancella il task, non potrà più essere eseguito
             Algorithm.cancella(); //termina java settando il flag a true
             cancella(); //termina c++ settando il flag a true

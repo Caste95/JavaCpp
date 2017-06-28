@@ -99,22 +99,23 @@ public class Algorithm {
 
     //algoritmo di prodotto tra due matrici
     public static long calcMatr(int n) {
+        int i, j, l;
         long start, end;            //per il tempo
         //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
         start = System.currentTimeMillis(); //primo tempo
         int[][] fatt1 = new int[n][n];
         int[][] fatt2 = new int[n][n];
         int[][] ris = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
                 if (flag) return -1;
                 fatt1[i][j] = (int)(Math.random()*100);
                 fatt2[i][j] = (int)(Math.random()*100);
             }
         }
-        for (int j = 0; j < n; j++) {
-            for (int i = 0; i < n; i++) {
-                for (int l = 0; l < n; l++) {
+        for (j = 0; j < n; j++) {
+            for (i = 0; i < n; i++) {
+                for (l = 0; l < n; l++) {
                     if (flag) return -1;
                     ris[i][j] += fatt1[l][j] * fatt2[i][l];
                 }
