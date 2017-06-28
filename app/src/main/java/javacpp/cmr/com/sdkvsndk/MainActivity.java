@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         case 4:
                             //numeri casuali: non da problemi di crash applicativi
                             break;
-                        case 5://Ackermann
+                        case 5:
+                            //Ackermann
                             if(y > 4 || ((y == 4) && z > 0)) //TODO: Crasha quasi sempre, non so come limitare l'input by Enrico
                                 throw new Exception();
                             break;
