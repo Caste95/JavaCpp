@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         inputm.setVisibility(View.GONE);
         inputn.setVisibility(View.GONE);
 
+        stop.setVisibility(View.VISIBLE);
+
         //se scelgo ackermann utilizzo due edittext per i due parametri
         if (pos == 5) {
             plot.setVisibility(View.INVISIBLE); //Ackermann non si può plottare
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                stop.setVisibility(View.VISIBLE);
                 try {
                     //ackermann richiede due valori di input
                     if (pos == 5) {
@@ -174,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!w.isCancelled())
+                if(w != null && !w.isCancelled())
                     w.terminate();
             }
         });
@@ -274,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
             tj = res[0]; //tempo java
             tc = res[1]; //tempo cpp
 
+            stop.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
@@ -289,9 +294,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onCancelled(){ //Rendo visibili i pulsanti go e plotta, e visualizzo un toast di notifica
             Toast.makeText(MainActivity.this, R.string.canc, Toast.LENGTH_LONG).show();
+            stop.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.INVISIBLE);
-            go.setVisibility(View.INVISIBLE);
-            plot.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
         }
