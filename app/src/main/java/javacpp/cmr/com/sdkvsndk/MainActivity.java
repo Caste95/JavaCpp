@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO: Chiedere al tutor perchè la progress bar rimane visibile
         prBar.setVisibility(View.INVISIBLE);
+        stop.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 2:
                             //PrimalityTest
-                            if ((x >= primes.length) || (x < 1)) {
+                            if ((x > primes.length) || (x < 1)) {
                                 throw new Exception();
-                            }
+                            }else Toast.makeText(MainActivity.this,String.valueOf(primes[x-1]),Toast.LENGTH_SHORT);
                             break;
                         case 3:
                             //NestedLoop: non da problemi di crash applicativi
@@ -204,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             go.setVisibility(View.INVISIBLE);
             plot.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.VISIBLE);
-
+            stop.setVisibility(View.VISIBLE);
             //setto i flag a false permettendo la normale esecuzione degli algoritmi
             Algorithm.setta();
             setta();
@@ -283,8 +284,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onCancelled(){ //Rendo visibili i pulsanti go e plotta, e visualizzo un toast di notifica
             Toast.makeText(MainActivity.this, R.string.canc, Toast.LENGTH_LONG).show();
             prBar.setVisibility(View.INVISIBLE);
-            go.setVisibility(View.INVISIBLE);
-            plot.setVisibility(View.INVISIBLE);
+            stop.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
         }
