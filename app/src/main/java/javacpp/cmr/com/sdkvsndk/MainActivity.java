@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             //PrimalityTest
                             if ((x > primes.length) || (x < 1)) {
                                 throw new Exception();
-                            }else Toast.makeText(MainActivity.this,String.valueOf(primes[x-1]),Toast.LENGTH_SHORT);
+                            }else Toast.makeText(MainActivity.this,String.valueOf(primes[x-1]),Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             //NestedLoop: non da problemi di crash applicativi
