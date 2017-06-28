@@ -1,20 +1,19 @@
 package javacpp.cmr.com.sdkvsndk;
 
-public class Algorithm {
+class Algorithm {
 
     //flag per permettere l'uscita dell'algoritmo in caso in cui sia stato premuto su stop
     private static boolean flag = false;
-
-/*
-* Tutti gli algoritmi ritorneranno -1 quando stoppati, il risultato non verrà comunque elaborato
-*/
+    /*
+      * Tutti gli algoritmi ritorneranno -1 quando stoppati, il risultato non verrà comunque elaborato
+    */
 
     //metodi per accedere al flag
-    public static void cancella(){
+    static void cancella(){
         flag = true;
     }
 
-    public static void setta(){
+    static void setta(){
         flag = false;
     }
 
@@ -28,7 +27,7 @@ public class Algorithm {
     * useremo come seme il tempo con current time millis e sara sempre il
     * primo elemento della lista
     */
-    public static long random (long n){
+    static long random (long n){
         long m = 4294967296L;       // = 2^32 (L per i long)
         long a = 432274426543147L;  //numero primo a 15 cifre (L per i long)
         int c = 42430867;           // un altro numero primo molto grande a 8 cifre
@@ -52,7 +51,7 @@ public class Algorithm {
     * Un algoritmo molto semplice prende come parametro di ingresso un numero intero n
     * e fa sei cicli uno dentro l'altro con ognuno n iterazioni
      */
-    public static long nestedLoops (int n){
+    static long nestedLoops (int n){
         int i, j, k, l, r, p; //contatori dei cicli
         long start, end;
         //inizio algoritmo e prendo primo tempo
@@ -88,7 +87,7 @@ public class Algorithm {
     }
 
     //incapsulamento di fibonacci per la misura del tempo
-    public static long fibonacci(int n) {
+    static long fibonacci(int n) {
         long start, end;            //per il tempo
         start = System.currentTimeMillis(); //primo tempo
         unfibonacci(n);
@@ -98,7 +97,7 @@ public class Algorithm {
     }
 
     //algoritmo di prodotto tra due matrici
-    public static long calcMatr(int n) {
+    static long calcMatr(int n) {
         int i, j, l;
         long start, end;            //per il tempo
         //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
@@ -135,7 +134,7 @@ public class Algorithm {
     }
 
     //incapsulamento di ackermann per la misura del tempo
-    public static long acker(long m, long n) {
+    static long acker(long m, long n) {
         long start, end;            //per il tempo
         start = System.currentTimeMillis(); //primo tempo
         unacker(m, n);
@@ -145,7 +144,7 @@ public class Algorithm {
     }
 
 
-    public static long primalityTest(long n) {
+    static long primalityTest(long n) {
         long s = System.currentTimeMillis();
 
         boolean prime = true;
@@ -168,7 +167,7 @@ public class Algorithm {
         return e-s;
     }
 
-    public static long eratostene(long r) {
+    static long eratostene(long r) {
         long s = System.currentTimeMillis();
 
         int i, j;
