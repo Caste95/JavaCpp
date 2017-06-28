@@ -42,7 +42,6 @@ class AlgorithmView {
 
     //costruttore
     private AlgorithmView(int nome, int tipo, int desc){
-        super(); //TODO rimuovi
         id = id_counter++;
         this.nome = nome;
         this.tipo = tipo;
@@ -281,7 +280,7 @@ class AlgorithmView {
         return x;
     }
 
-    //prova
+    //lista degli algoritmi
     static final AlgorithmView[] list = new AlgorithmView[]{
             new AlgorithmView(R.string.fib, R.string.cpu, R.string.fibd),
             new AlgorithmView(R.string.mat, R.string.memory, R.string.matd),
@@ -290,6 +289,30 @@ class AlgorithmView {
             new AlgorithmView(R.string.cas, R.string.cpu, R.string.casd),
             new AlgorithmView(R.string.ack, R.string.cpu, R.string.ackd),
             new AlgorithmView(R.string.era, R.string.cpu, R.string.arad)
+    };
+
+    //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
+    //variabile contenente i numeri primi per l'algoritmo primalitytest
+    static final long[] primes = {
+            7,
+            97,
+            773,
+            5113,
+            54673L,
+            633797L,
+            4563467L,
+            9139397L,
+            34542467L,
+            359454547L,
+            2331891997L,
+            16333396997L,
+            297564326947L,
+            2456435675347L,
+            37267627626947L,
+            726483934563467L,
+            9573357564326947L,
+            75136938367986197L,
+            1276812967623946997L
     };
 
 }

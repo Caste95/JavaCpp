@@ -1,5 +1,6 @@
 package javacpp.cmr.com.sdkvsndk;
 
+import static javacpp.cmr.com.sdkvsndk.AlgorithmView.primes;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -28,10 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private long tj, tc;
     private int pos;
 
-    //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
-    private final long[] primes = {7,97,773,5113,54673L,633797L,4563467L,9139397L,34542467L,359454547L,
-            2331891997L,16333396997L,297564326947L,2456435675347L,37267627626947L,726483934563467L,9573357564326947L,75136938367986197L,1276812967623946997L};
-
+    //asynctask
     private Worker w;
 
     // carico la libreria nativ-lib

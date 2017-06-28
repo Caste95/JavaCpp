@@ -11,7 +11,7 @@
     <string name="fib">Fibonacci</string>
     <string name="cas">Numeri Casuali</string>
     <string name="mat">Prodotto Matriciale</string>
-    <string name="prim">Numeri Primi</string>
+    <string name="prim">Primality Test</string>
     <string name="ack">Ackermann</string>
     <string name="loop">NestedLoops</string>
     <string name="era">Crivello di Eratostene</string>
