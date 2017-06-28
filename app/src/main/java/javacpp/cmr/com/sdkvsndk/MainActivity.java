@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button go, stop, plot;
     private EditText input, inputm, inputn;
     private ProgressBar prBar;
+
     //varibili di utilizzo
     private int x;
     private int y;
