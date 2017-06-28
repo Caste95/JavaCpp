@@ -4,8 +4,6 @@
     <string name="outputcpp">Output C++</string>
     <string name="buttonGo">GO</string>
     <string name="buttonStop">STOP</string>
-    <string name="toast">Inserire Input</string>
-    <string name="toastError">Errore Applicativo</string>
     <string name="cpu">CPU Bound</string>
     <string name="memory">Memory Bound</string>
     <string name="fib">Fibonacci</string>

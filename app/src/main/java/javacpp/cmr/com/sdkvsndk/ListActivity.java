@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.SimpleAdapter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ListActivity extends AppCompatActivity {
@@ -19,9 +20,7 @@ public class ListActivity extends AppCompatActivity {
 
         //devo fare un arrraylist e riempirla
         ArrayList<AlgorithmView> arr = new ArrayList<>();
-        for(int i = 0; i < AlgorithmView.list.length; i++){
-            arr.add(AlgorithmView.list[i]);
-        }
+        Collections.addAll(arr, AlgorithmView.list);
 
         //ora devo inizializzare una mappa chiave valore per poter mettere i valore nella lista con il simple adapter
         ArrayList<HashMap<String, Object>> dati = new ArrayList<>();

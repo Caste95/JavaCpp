@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    //elementi interfaccia grafica
-    private TextView tit, desc, ris1, ris2;
+    private TextView ris1;
+    private TextView ris2;
     private Button go, stop, plot;
     private EditText input, inputm, inputn;
     private ProgressBar prBar;
@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private int x;
     private int y;
     private int z;
-    private long tj, tc;
     private int pos;
 
     //asynctask
@@ -55,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //prendo gli id dell'interfaccia
-        tit = (TextView) findViewById(R.id.titolo);
-        desc = (TextView) findViewById(R.id.desc);
+        TextView tit = (TextView) findViewById(R.id.titolo);
+        TextView desc = (TextView) findViewById(R.id.desc);
         ris1 = (TextView) findViewById(R.id.resultsjava);
         ris2 = (TextView) findViewById(R.id.resultscpp);
         go = (Button) findViewById(R.id.buttonGo);
@@ -265,8 +264,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Long[] res){ //eseguito dopo che il task è terminato correttamente, sono nel thread UI
             //rendo esplicito il risultato
-            tj = res[0]; //tempo java
-            tc = res[1]; //tempo cpp
+            long tj = res[0];
+            long tc = res[1];
 
             prBar.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);

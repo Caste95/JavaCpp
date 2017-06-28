@@ -103,9 +103,9 @@ public class GraphActivity extends AppCompatActivity {
                 //x non dovrebbe essere mai null ma non si sa mai quindi faccio questo if
                 //in caso sia null non faccio niente
                 if(x != null){
-                    for(int i = 0; i < x.length; i++) {
-                        outc = outc + x[i][0] + "\n";
-                        outjava = outjava + x[i][1] + "\n";
+                    for (int[] aX : x) {
+                        outc = outc + aX[0] + "\n";
+                        outjava = outjava + aX[1] + "\n";
                     }
                 }
                 in.setText(R.string.Input);
@@ -131,9 +131,9 @@ public class GraphActivity extends AppCompatActivity {
                 //x non dovrebbe essere mai null ma non si sa mai quindi faccio questo if
                 //in caso sia null non faccio niente
                 if(x != null){
-                    for(int i = 0; i < x.length; i++) {
-                        outc = outc + x[i][0] + "\n";
-                        outjava = outjava + x[i][1] + "\n";
+                    for (int[] aX : x) {
+                        outc = outc + aX[0] + "\n";
+                        outjava = outjava + aX[1] + "\n";
                     }
                 }
                 in.setText(R.string.Input);
