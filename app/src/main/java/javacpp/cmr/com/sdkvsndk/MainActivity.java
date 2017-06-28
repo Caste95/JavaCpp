@@ -206,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
             plot.setVisibility(View.INVISIBLE);
             prBar.setVisibility(View.VISIBLE);
             stop.setVisibility(View.VISIBLE);
+            ris1.setText(R.string.outputjava);
+            ris2.setText(R.string.outputcpp);
             //setto i flag a false permettendo la normale esecuzione degli algoritmi
             Algorithm.setta();
             setta();
@@ -288,8 +290,7 @@ public class MainActivity extends AppCompatActivity {
             stop.setVisibility(View.INVISIBLE);
             go.setVisibility(View.VISIBLE);
             plot.setVisibility(View.VISIBLE);
-            ris1.setText(R.string.outputjava);
-            ris2.setText(R.string.outputcpp);
+
         }
 
         //termina il più velocemente possibile il task
