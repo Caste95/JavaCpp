@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                             //fibonacci: non da problemi di crash applicativi
                             break;
                         case 1:
-                            //prodotto matriciale: non da problemi di crash applicativi
+                            if (x > 1000)
+                                throw new Exception();
                             break;
                         case 2:
                             //PrimalityTest
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 5:
                             //Ackermann
-                            if(y > 4 || (((y == 4) && z > 0) || z > 10))
+                            if(y > 4 || ((y == 4) && z > 0) || z >= 10)
                                 throw new Exception();
                             break;
                         case 6:
