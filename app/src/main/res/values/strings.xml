@@ -13,13 +13,15 @@
     <string name="ack">Ackermann</string>
     <string name="loop">NestedLoops</string>
     <string name="era">Crivello di Eratostene</string>
+    <string name="strcat">Strcat</string>
     <string name="fibd">F[n] = 0 se n = 0\nF[n] = 1 se n = 1\nF[n] = F[n-1] + F[n-2] altrimenti\nInserire un numero n non troppo alto</string>
     <string name="casd">Genera un array di numeri casuali di dimensione n moltiplicato per 10^6</string>
     <string name="matd">Crea e moltiplica tra di loro due matrici quadrate di ordine n</string>
-    <string name="primd">Verifica che un numero prefissato di n cifre sia primo\nn compreso tra 1 e 19 inclusi</string>
+    <string name="primd">Verifica che un numero prefissato di n cifre sia primo.\nInput: n &gt; 0 &amp; n &lt; 20</string>
     <string name="ackd">Descrizione algoritmo Ackermann</string>
     <string name="loopd">Esegue sei cicli for annidati da 0 a n</string>
     <string name="arad">Calcola tutti i numeri primi tra 2 e 10^n</string>
+    <string name="strcatd">Concatena stringhe formate da un carattere.\nInput: il numero n di stringhe.</string>
     <string name="resjava">Algoritmo Java: </string>
     <string name="resc">Algoritmo C: </string>
     <string name="unita">(ms)</string>
@@ -39,4 +41,5 @@
     <string name="canc">Algoritmo stoppato!</string>
     <string name="invalid">Input non valido!</string>
     <string name="primeinfo">Test su </string>
+    <string name="notimpl">Algoritmo non implementato!</string>
 </resources>

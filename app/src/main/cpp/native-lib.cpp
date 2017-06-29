@@ -236,4 +236,23 @@ jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_primalityTest(JNIEnv *env, jobj
     t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);
     return (jlong) t;
 }
+
+    jlong Java_javacpp_cmr_com_sdkvsndk_MainActivity_strcat(JNIEnv *env, jobject obj, jint n) {
+        timeval start, stop;
+        long long t;
+        gettimeofday(&start, NULL);
+
+        std::string st;
+        for(int i = 0; (i < n); i++)
+            if(flag)
+                return -1;
+            else
+                st += "a";
+
+        gettimeofday(&stop, NULL);
+        t = (stop.tv_sec - start.tv_sec) * 1000;
+        t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);
+        return (jlong) t;
+
+    }
 }
