@@ -18,7 +18,7 @@
     <string name="matd">Crea e moltiplica tra di loro due matrici quadrate di ordine n</string>
     <string name="primd">Verifica che un numero prefissato di n cifre sia primo\nn compreso tra 1 e 19 inclusi</string>
     <string name="ackd">Descrizione algoritmo Ackermann</string>
-    <string name="loopd">Esegue sei cicli for annidati su un array di dimensione n</string>
+    <string name="loopd">Esegue sei cicli for annidati da 0 a n</string>
     <string name="arad">Calcola tutti i numeri primi tra 2 e 10^n</string>
     <string name="resjava">Algoritmo Java: </string>
     <string name="resc">Algoritmo C: </string>
