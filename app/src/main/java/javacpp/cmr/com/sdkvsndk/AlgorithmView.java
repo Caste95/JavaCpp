@@ -296,7 +296,8 @@ class AlgorithmView {
             new AlgorithmView(R.string.loop, R.string.cpu, R.string.loopd),
             new AlgorithmView(R.string.cas, R.string.cpu, R.string.casd),
             new AlgorithmView(R.string.ack, R.string.cpu, R.string.ackd),
-            new AlgorithmView(R.string.era, R.string.cpu, R.string.arad)
+            new AlgorithmView(R.string.era, R.string.cpu, R.string.arad),
+            new AlgorithmView(R.string.strcat, R.string.memory, R.string.strcatd)
     };
 
 

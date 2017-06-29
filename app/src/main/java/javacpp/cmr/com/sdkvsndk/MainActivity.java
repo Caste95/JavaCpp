@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public native long nestedLoops(int n);
     public native long eratostene(int n);
     public native long primalityTest(long n);
+    public native long strcat(int n);
 
     //metodo onCreate
     @Override
@@ -155,6 +156,12 @@ public class MainActivity extends AppCompatActivity {
                             //Crivello di Eratostene
                             if(x > 8)
                                 throw new Exception();
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            //algoritmo presente in lista ma non implementato
+                            Toast.makeText(MainActivity.this, R.string.notimpl, Toast.LENGTH_SHORT).show();
                             break;
                     }
                     //lanciamo l'asynctask
@@ -258,13 +265,13 @@ public class MainActivity extends AppCompatActivity {
             switch (pos) {
                 case 0:
                     //chiamo l'algoritmo di Fibonacci
-                    res[0] = Algorithm.fibonacci(x);
-                    res[1] = fibonacci(x);
+                    res[0] = Algorithm.fibonacci(params[0]);
+                    res[1] = fibonacci(params[0]);
                     break;
                 case 1:
                     //chiamo l'algoritmo di calcolo matriciale
-                    res[0] = Algorithm.calcMatr(x);
-                    res[1] = calcMatr(x);
+                    res[0] = Algorithm.calcMatr(params[0]);
+                    res[1] = calcMatr(params[0]);
                     break;
                 case 2:
                     //chiamo l'algoritmo dei numeri primi
@@ -273,12 +280,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     //chiamo l'algoritmo di NestedLoop
-                    res[0] = Algorithm.nestedLoops(x);
-                    res[1] = nestedLoops(x);
+                    res[0] = Algorithm.nestedLoops(params[0]);
+                    res[1] = nestedLoops(params[0]);
                     break;
                 case 4:
                     //chiamo l'algoritmo di Numeri Casuali
-                    in = (int) (x * Math.pow(10, 6));
+                    in = (int) (params[0] * Math.pow(10, 6));
                     res[0] = Algorithm.random(in);
                     res[1] = random(in);
                     break;
@@ -290,11 +297,18 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 6:
                     //chiamo l'algoritmo di Eratostene
-                    in = (int) (Math.pow(10, x));
+                    in = (int) (Math.pow(10, params[0]));
                     res[0] = Algorithm.eratostene(in);
                     res[1] = eratostene(in);
                     break;
-                default: //non verrà mai chiamato
+                case 7:
+                    //chiamo l'algoritmo strcat
+                    res[0] = Algorithm.strcat(params[0]);
+                    res[1] = strcat(params[0]);
+                    break;
+                default:
+                    //algoritmo presente in lista ma non implementato
+                    res[0] = res[1] = -1L;
                     break;
             }
             return res;

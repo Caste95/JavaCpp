@@ -229,4 +229,19 @@ class Algorithm {
     }
 
 
+    static long strcat(int n){
+        long s = System.currentTimeMillis();
+
+        String st = new String();
+        for(int i = 0; (i < n); i++)
+            if(flag)
+                return -1;
+            else
+                //Data l'immutabilità degli oggetti String, st viene ricreata e distrutta dal GC
+                //il tutto è mooooolto lento
+                st += "a";
+
+        long e = System.currentTimeMillis();
+        return e - s;
+    }
 }
