@@ -1,20 +1,23 @@
 package javacpp.cmr.com.sdkvsndk;
 
+/*
+  * Classe per la gestione del passaggio di paramtri tra le varie Activity, per l'interfacciamentro con il db
+  * e per la gestione e creazione dei dati da plottare su grafico
+  * Serve per interfacciarsi con l'adapter della ListView nella ListActivity dando i valori da mettere nelle righe
+  * della ListView e prendendo gli ultimi dati aggiornati(input, tempo esecuzione c e java)
+  * Serve come tramite tra le 3 varie Activity visto che contiene la struttura base (LIST in fondo alla classe)
+  * così facendo basta la posizione come parametro di passaggio tra le varie activity che sarà l'indice a cui
+  * si accede a LIST così da prendere i vari parametri(Titolo, descrzioni, dati, ecc...)
+  * Serve anche per interfacciarsi con il db sempre per la visualizzazzione delle ultime esecuzioni nella
+  * ListActivity, mentre serve anche per prendere i dati nel db per metterli dentro alle Series che saranno
+  * poi plottate nella GraphActivity
+ */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
-
-/*
-  * Classe per la gestione della visualizzazzione degli elementi
-  * Serve per interfacciarsi con l'adapter della listview nella listActivity
-  * Serve per il passaggio della posizione e quindi visualizzazzione della descrizione
-  * e della scelta dell'algoritmo in ExecutionsActivity
-  * E anche per interfacciarsi con il db sempre per la visualizzazzione delle ultime esecuzioni
-  * Inoltre serve per la creazione dei dati da mettere nel grafico
- */
-
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -24,13 +27,13 @@ class AlgorithmView {
     private static int id_counter = 0;
 
     //variabili
-    private final int id;
-    private final int nome;
-    private final int tipo;
-    private final int desc;
-    private int input = 0; //ultimo input dato
-    private long esec = 0; //ultimo tempo esecuzione cpp
-    private long esej = 0; //ultimo tempo esecuzione java
+    private final int id;   //ID che usero per identificare l'algoritmo nel db
+    private final int nome; //nome algoritmo
+    private final int tipo; //tipo (memory bound o cpu bound)
+    private final int desc; //descrizione dell'algoritmo
+    private int input = 0;  //ultimo input dato
+    private long esec = 0;  //ultimo tempo esecuzione cpp
+    private long esej = 0;  //ultimo tempo esecuzione java
 
     //variabili per il db
     private SQLiteDatabase db;
@@ -40,7 +43,7 @@ class AlgorithmView {
     private LineGraphSeries<DataPoint> seriesC;
     private LineGraphSeries<DataPoint> seriesJava;
 
-    //costruttore
+    //costruttore private perchè inizializzo gli elementi solo all'interno di questa classe
     private AlgorithmView(int nome, int tipo, int desc){
         id = id_counter++;
         this.nome = nome;
@@ -48,18 +51,21 @@ class AlgorithmView {
         this.desc = desc;
     }
 
-    //metodi
+    //inizio metodi
+
+    //ritorna l'id(privato lo utilizzo solo qua dentro)
     private int getId() {
         return id;
     }
 
+    //restituisce la descrzione
     public int getDesc() {
         return desc;
     }
 
-    //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
-    //il giusto valore dal db
-    long getEsec(Context c) {
+    //quando nella listActivity andrò a chiamare questo metodo allora in quel caso prendero
+    //l'ultimo tempo dell'esecuzione in c con un interrogazione al db
+    long getEseC(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in c fatta
@@ -86,9 +92,9 @@ class AlgorithmView {
         return esec;
     }
 
-    //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
-    //il giusto valore dal db
-    long getEsej(Context c) {
+    //quando nella listActivity andrò a chiamare questo metodo allora in quel caso prendero
+    //l'ultimo tempo dell'esecuzione in java con un interrogazione al db
+    long getEseJ(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
         //creo la query che mi dara l'ultima esecuzione in java fatta
@@ -115,16 +121,18 @@ class AlgorithmView {
         return esej;
     }
 
+    //restituisce il tipo
     int getTipo() {
         return tipo;
     }
 
+    //restituisce il nome
     int getNome() {
         return nome;
     }
 
-    //quando nella listActivity andro a chiamare questo metodo allora in quel caso prendero
-    //il giusto valore dal db
+    //quando nella listActivity andrò a chiamare questo metodo allora in quel caso prendero
+    //l'ultimo input usato con un interrogazione al db
     int getInput(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
@@ -165,7 +173,7 @@ class AlgorithmView {
         oh.close();
     }
 
-    //funzione per ricevere la LineGraphSeries che serve per plottare il grafico della funzione
+    //funzione per creare la LineGraphSeries del c che serve per plottare il grafico dell'algoritmo
     LineGraphSeries<DataPoint> getSeriesC(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
@@ -198,7 +206,7 @@ class AlgorithmView {
         return seriesC;
     }
 
-    //funzione per ricevere la LineGraphSeries che serve per plottare il grafico della funzione
+    //funzione per creare la LineGraphSeries del java che serve per plottare il grafico dell'algoritmo
     LineGraphSeries<DataPoint> getSeriesJava(Context c) {
         oh = new DBOpenHelper(c);
         db = oh.getWritableDatabase();
@@ -228,8 +236,8 @@ class AlgorithmView {
         return seriesJava;
     }
 
-    //funzione che mi resitituisce quanti righe di imput diverse ho che mi serve per fare il controllo
-    //prima di fare ls stampa del grafico
+    //funzione che mi resitituisce quanti righe di input diverse ho che mi serve per fare il controllo
+    //prima di fare lanciare la GraphActivity
     //in teoria non servirebbe fare anche la media ma messa per sicurezza
     int getNumData(Context c){
         int n;
@@ -254,7 +262,7 @@ class AlgorithmView {
     //funzione che dato in ingresso il contesto e il numero di input mi trova tutti i dati
     //prodotti da quell'input per quel specifico algoritmo
     //mi restituisce una matrice con la prima colonna i dati in c e la seconda in java
-    int[][] getData(Context c, int input){
+    int[][] getDataByInput(Context c, int input){
         int n;
         int x[][] = null;
         oh = new DBOpenHelper(c);
@@ -281,7 +289,7 @@ class AlgorithmView {
     }
 
     //lista degli algoritmi
-    static final AlgorithmView[] list = new AlgorithmView[]{
+    static final AlgorithmView[] LIST = new AlgorithmView[]{
             new AlgorithmView(R.string.fib, R.string.cpu, R.string.fibd),
             new AlgorithmView(R.string.mat, R.string.memory, R.string.matd),
             new AlgorithmView(R.string.prim, R.string.cpu, R.string.primd),

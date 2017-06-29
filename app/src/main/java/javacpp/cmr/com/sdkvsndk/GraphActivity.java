@@ -1,5 +1,22 @@
 package javacpp.cmr.com.sdkvsndk;
 
+/**
+ * Activity che mi crea il grafico dei tempi degli algoritmi
+ * Usiamo come libreria per il grafico: Graph View
+ * Sito con tutta la docomentazione: http://www.android-graphview.org/
+ * Obbiettivo di questa activity è di plottare i tempi di java e c dei vari algoritmi
+ * L'asse delle y sarà il tempo in millisecondi
+ * L'asse delle x sarà gli input che sono stati dati agli algoritmi
+ * Per quanto riguarda gli stessi input sarà fatta la media
+ * Inoltre se l'utente vuole vedere tutti i dati per gli stessi input il grafico è "toccabile"
+ * e verranno stampati tutti i dati su delle TextBox
+ * Il grafico è stato reso scrollabile e zoomabile per essere più leggibile
+ * I dati che usa il grafico sono delle Series e come punti dei DataPoint
+ * Una Series quindi e un insieme di DataPoint
+ * Questi dati sono presi dal db e le Series sono direttamente generate nella classe AlgorithmView
+ * Una per i tempi del c e una per i tempi del java
+ */
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,12 +62,12 @@ public class GraphActivity extends AppCompatActivity {
 
         //recupero i dati passati dall'intent e setto il titolo
         pos = getIntent().getIntExtra("pos", 0);
-        titolo.setText(AlgorithmView.list[pos].getNome());
+        titolo.setText(AlgorithmView.LIST[pos].getNome());
 
         //qui faccio la serie che stampera il grafico(dovo prendera dal db)
         //usero la funzione implementata in AlgoritmhView
-        LineGraphSeries<DataPoint> seriesC = AlgorithmView.list[pos].getSeriesC(this);
-        LineGraphSeries<DataPoint> seriesJava = AlgorithmView.list[pos].getSeriesJava(this);
+        LineGraphSeries<DataPoint> seriesC = AlgorithmView.LIST[pos].getSeriesC(this);
+        LineGraphSeries<DataPoint> seriesJava = AlgorithmView.LIST[pos].getSeriesJava(this);
 
         //setto alcuni parametri delle serie del c
         //setto il colore per differenziare le due serie
@@ -99,7 +116,7 @@ public class GraphActivity extends AppCompatActivity {
             public void onTap(Series series, DataPointInterface dataPoint) {
                 int input = (int) dataPoint.getX(); //prendo l'input
                 String outc = "", outjava = ""; //stringhe per l'output
-                int x[][] = AlgorithmView.list[pos].getData(GraphActivity.this, input);
+                int x[][] = AlgorithmView.LIST[pos].getDataByInput(GraphActivity.this, input);
                 //x non dovrebbe essere mai null ma non si sa mai quindi faccio questo if
                 //in caso sia null non faccio niente
                 if(x != null){
@@ -127,7 +144,7 @@ public class GraphActivity extends AppCompatActivity {
             public void onTap(Series series, DataPointInterface dataPoint) {
                 int input = (int) dataPoint.getX(); //prendo l'input
                 String outc = "", outjava = ""; //stringhe per l'output
-                int x[][] = AlgorithmView.list[pos].getData(GraphActivity.this, input);
+                int x[][] = AlgorithmView.LIST[pos].getDataByInput(GraphActivity.this, input);
                 //x non dovrebbe essere mai null ma non si sa mai quindi faccio questo if
                 //in caso sia null non faccio niente
                 if(x != null){

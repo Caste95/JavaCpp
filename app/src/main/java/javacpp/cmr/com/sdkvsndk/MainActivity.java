@@ -1,5 +1,24 @@
 package javacpp.cmr.com.sdkvsndk;
 
+/**
+ * Classe Principale in cui verranno eseguiti gli algoritmi in AsyncTask
+ * Qua gestiamo l'AsyncTask su cui si eseguono gli algoritmi in BackGround così da rendere l'nterfaccia
+ * dell'utente in grado di rispondere ancora ai comandi e l'utente è abilitato per mezzo di un pulsante di
+ * stop di fermare l'esecuzione dell'algoritmo.
+ * Mentre l'algoritmo viene eseguito l'utente vedrà una progressBar e saranno disabilitati i pulsanti
+ * go e plotta per evitare "incidenti"
+ * Il risultato sarà il tempo di esecuzione per i due algoritmi in c e java in millisecondi
+ * Facciamo anche un controllo sull'input che viene inserito dall'utente in modo da non causare crash
+ * inattesi del programma.
+ * Per l'algoritmo di Ackerman l'interfaccia è lievemente modificata in modo da far capire meglio come
+ * funziona infatti prende due dati in input le decine e le unita
+ *      ESEMPIO: se l'utente inserisce 1 e 5 -> sarebbe come 15!
+ * Abbiamo anche disabilitato che si blocchi lo schermo così l'algoritmo non verrà stoppato dal metodo onPause
+ * Abbiamo anche settato che l'unico orientamento disponibile è il portrait
+ * Nel metodo onPause viene stoppato sempre l'algoritmo se sta eseguendo così da mantenere una certa consistenza
+ * dei tempi generati
+ */
+
 import static javacpp.cmr.com.sdkvsndk.Algorithm.PRIMES;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,6 +35,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    //variabili dell'interfaccia
     private TextView ris1;
     private TextView ris2;
     private Button go, stop, plot;
@@ -36,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("native-lib");
     }
 
-    //dichiaro i metodi
+    //dichiaro i metodi nativi
     public native void cancella();
     public native void setta();
     public native long fibonacci(int n);
@@ -47,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public native long eratostene(int n);
     public native long primalityTest(long n);
 
+    //metodo onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
         //recupero i dati passati dall'intent
         pos = getIntent().getIntExtra("pos", 0);
-        desc.setText(AlgorithmView.list[pos].getDesc());
-        tit.setText(AlgorithmView.list[pos].getNome());
+        desc.setText(AlgorithmView.LIST[pos].getDesc());
+        tit.setText(AlgorithmView.LIST[pos].getNome());
 
+        //setto le visibilita delle EditText
         input.setVisibility(View.VISIBLE);
         inputm.setVisibility(View.GONE);
         inputn.setVisibility(View.GONE);
@@ -114,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
                             //PrimalityTest
                             if ((x > PRIMES.length) || (x < 1)) {
                                 throw new Exception();
-                            }else Toast.makeText(MainActivity.this,getString(R.string.primeinfo) + " " + String.valueOf(PRIMES[x-1]),Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                Toast.makeText(MainActivity.this,getString(R.string.primeinfo)+" "+String.valueOf(PRIMES[x-1]),Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
                             //NestedLoop: non da problemi di crash applicativi
@@ -138,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     w.execute(x,  y,  z); //solo ackermann considera gli ultimi due parametri
                 }
                 catch (Exception e){
+                    //in caso di problemi lanciamo un toast e settiamo di nuovo le TextView del risultato
                     Toast.makeText(MainActivity.this, R.string.invalid, Toast.LENGTH_LONG).show();
                     ris1.setText(R.string.outputjava);
                     ris2.setText(R.string.outputcpp);
@@ -152,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 //lancerò l'activity solo se avrò un certo numero di dati da plottare
                 //perche se no il grafico viene male e potrebbero essere lanciate delle eccezioni
                 //in questo caso scegliamo di visualizzare il grafico solo se abbiamo piu di 5 input diversi
-                if(AlgorithmView.list[pos].getNumData(MainActivity.this) >= 5) {
+                if(AlgorithmView.LIST[pos].getNumData(MainActivity.this) >= 5) {
                     Intent i = new Intent(MainActivity.this, GraphActivity.class);
                     //gli passo la posizione che mi identificherà l'algoritmo che dovrò plottare
                     i.putExtra("pos", pos);
@@ -175,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //metodo onPause: dovremo stoppare l'AsyncTask
     @Override
     public void onPause(){
         super.onPause();
@@ -198,8 +224,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    //AsyncTask
     private class Worker extends AsyncTask<Integer, Void, Long[]>{
 
+        //eseguito prima dell'esecuzione degli algoritmi, setto le visibilita
         @Override
         protected void onPreExecute(){
             go.setVisibility(View.INVISIBLE);
@@ -212,12 +240,15 @@ public class MainActivity extends AppCompatActivity {
             if(pos == 5){
                 inputm.setEnabled(false);
                 inputn.setEnabled(false);
-            }else input.setEnabled(false);
+            }
+            else
+                input.setEnabled(false);
             //setto i flag a false permettendo la normale esecuzione degli algoritmi
             Algorithm.setta();
             setta();
         }
 
+        //qui verranno eseguiti gli algoritmi
         @Override
         protected Long[] doInBackground(Integer... params) { //Spawn di un thread separato, la UI rimane responsive
             Long[] res = new Long[2];
@@ -283,13 +314,15 @@ public class MainActivity extends AppCompatActivity {
             if(pos == 5){
                 inputm.setEnabled(true);
                 inputn.setEnabled(true);
-            }else input.setEnabled(true);
+            }
+            else
+                input.setEnabled(true);
 
             ris1.setText(getString(R.string.resjava) + " " + Long.toString(tj) + " " + getString(R.string.unita));
             ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
 
             //adesso dovro aggiornare il db
-            AlgorithmView.list[pos].updateDB(MainActivity.this, x, tc, tj);
+            AlgorithmView.LIST[pos].updateDB(MainActivity.this, x, tc, tj);
         }
 
         //Eseguito DOPO doInBackground() ---> creo un altro metodo per cancellare il task: terminate()
@@ -303,9 +336,9 @@ public class MainActivity extends AppCompatActivity {
             if(pos == 5){
                 inputm.setEnabled(true);
                 inputn.setEnabled(true);
-            }else input.setEnabled(true);
-
-
+            }
+            else
+                input.setEnabled(true);
         }
 
         //termina il più velocemente possibile il task

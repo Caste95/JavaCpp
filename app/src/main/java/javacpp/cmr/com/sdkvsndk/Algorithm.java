@@ -1,6 +1,20 @@
 package javacpp.cmr.com.sdkvsndk;
 
+/**
+ * Classe che contiene tutti gli algoritmi in java su cui svolgiamo i test in questo programma
+ * Contiene anche delle variabili di appoggio se servono ai vari algoritmi
+ * Misuriamo il tempo dentro ogni algorimo cosi da avere la massima precisione della misurazione
+ * Quindi ogni algoritmo ritornera un long (il tempo in ms)
+ * Inoltre ritornaranno -1 in caso l'algoritmo venga interrotto (distrutto l'asynctask che lo sta eseguendo)
+ * Questo è stato gestito con un flag di cui si verificherà lo stato durante l'esecuzione dell'algoritmo
+ * E' stato fatto questo perchè si era notato che anche se l'AsyncTask veniva uccisso se c'erano dei metodi
+ * esterni (gli algoritmi) che stavano eseguendo questi non venivano terminati e quindi andavano fino in fondo
+ * causando problemi di stabilità del programma in caso ne fossero stati chaimati altri visto che non avevano ancora
+ * liberato le risorse
+ */
+
 class Algorithm {
+
     //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
     //variabile contenente i numeri primi per l'algoritmo primalitytest
     static final long[] PRIMES = {

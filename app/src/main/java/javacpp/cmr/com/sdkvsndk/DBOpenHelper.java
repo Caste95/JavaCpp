@@ -33,9 +33,10 @@ class DBOpenHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    //onCreate
+    //onCreate (creazione della tabella a cui faremo riferimento nel programma)
     @Override
     public void onCreate(SQLiteDatabase db){
+        //if not exists potrebbe anche non essere messo ma per sicurezza lo messo lo stesso
         String sql = "create table if not exists " + TABLE + "( " +
                 BaseColumns._ID + " integer primary key autoincrement, " +
                 ALG + " integer not null, " +
@@ -46,7 +47,7 @@ class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
-    //onUpdate (non penso servira mai)
+    //onUpdate (sovrascritto perchè è obligatorio ma non lo usiamo visto che non ci sono altre versioni)
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         //non devo fare niente

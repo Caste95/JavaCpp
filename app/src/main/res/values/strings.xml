@@ -32,7 +32,7 @@
     <string name="titoloalg">Titolo</string>
     <string name="descalg">Descrizione algoritmo</string>
     <string name="tipoalg">Tipo algoritmo</string>
-    <string name="primaparte">Ultima esecuzione(ms) c++:</string>
+    <string name="primaparte">Last Time(ms) c:</string>
     <string name="secondaparte">java:</string>
     <string name="terzaparte">Input:</string>
     <string name="zero">0</string>
