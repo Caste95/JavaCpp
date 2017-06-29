@@ -1,24 +1,24 @@
 package javacpp.cmr.com.sdkvsndk;
 
-/**
- * Activity iniziale che visualizza la lista degli algoritmi
- * La visualizzazzione degli algoritmi è fatta tramite una ListView modificata
- * La grafica della list view è datta dal file listactivity_raw.xml in cui ci sono gli ID a cui fa riferimento
- * Usiamo un simple adapter per fare questo(si sarebbe potuto usare anche un adapter fatto ad-hoc estendendo
- * la classe adapter ma il simple adapter è più semplice da gestire.
- * Il SimpleAdapter prende come parametri:
- *  - Il contesto
- *  - La sorgente dei dati fatta in questo modo:
- *      - Un ArrayList che come elementi ha delle HashMap <String, Object>
- *          - Le stringe sono degli identificativi
- *          - Mentre gli Object sono i nostri dati che andremo a prendere dagli algoritmi in AlgorithmView
- *  - Poi prende un arrey di String che sara uguale agli identificatori che abbiamo messo nella HashMap
- *  - E un arrey di int che saranno gli id del nostro Layout
- * Cosi facendo andrà a ricomporre l'interfaccia desiderata per ogni riga della ListView
- * Renderemo "toccabile" ogni riga della lista così da poter lanciare un intent per aprire l'interfaccia
- * di esecuzione di quell'algoritmo (MainActivity).
- * Inoltre distruggeremo questa Activity in modo che quando si ritorna si abbiano i dati aggiornati in automatico
- * dal db senza dover fare passaggi di parametri inutili con gli intent
+/*
+  Activity iniziale che visualizza la lista degli algoritmi
+  La visualizzazzione degli algoritmi è fatta tramite una ListView modificata
+  La grafica della list view è datta dal file listactivity_raw.xml in cui ci sono gli ID a cui fa riferimento
+  Usiamo un simple adapter per fare questo(si sarebbe potuto usare anche un adapter fatto ad-hoc estendendo
+  la classe adapter ma il simple adapter è più semplice da gestire.
+  Il SimpleAdapter prende come parametri:
+   - Il contesto
+   - La sorgente dei dati fatta in questo modo:
+       - Un ArrayList che come elementi ha delle HashMap <String, Object>
+           - Le stringe sono degli identificativi
+           - Mentre gli Object sono i nostri dati che andremo a prendere dagli algoritmi in AlgorithmView
+   - Poi prende un arrey di String che sara uguale agli identificatori che abbiamo messo nella HashMap
+   - E un arrey di int che saranno gli id del nostro Layout
+  Cosi facendo andrà a ricomporre l'interfaccia desiderata per ogni riga della ListView
+  Renderemo "toccabile" ogni riga della lista così da poter lanciare un intent per aprire l'interfaccia
+  di esecuzione di quell'algoritmo (MainActivity).
+  Inoltre distruggeremo questa Activity in modo che quando si ritorna si abbiano i dati aggiornati in automatico
+  dal db senza dover fare passaggi di parametri inutili con gli intent
  */
 
 import android.content.Intent;

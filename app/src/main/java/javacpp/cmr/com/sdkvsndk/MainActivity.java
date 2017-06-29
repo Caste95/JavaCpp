@@ -1,22 +1,22 @@
 package javacpp.cmr.com.sdkvsndk;
 
-/**
- * Classe Principale in cui verranno eseguiti gli algoritmi in AsyncTask
- * Qua gestiamo l'AsyncTask su cui si eseguono gli algoritmi in BackGround così da rendere l'nterfaccia
- * dell'utente in grado di rispondere ancora ai comandi e l'utente è abilitato per mezzo di un pulsante di
- * stop di fermare l'esecuzione dell'algoritmo.
- * Mentre l'algoritmo viene eseguito l'utente vedrà una progressBar e saranno disabilitati i pulsanti
- * go e plotta per evitare "incidenti"
- * Il risultato sarà il tempo di esecuzione per i due algoritmi in c e java in millisecondi
- * Facciamo anche un controllo sull'input che viene inserito dall'utente in modo da non causare crash
- * inattesi del programma.
- * Per l'algoritmo di Ackerman l'interfaccia è lievemente modificata in modo da far capire meglio come
- * funziona infatti prende due dati in input le decine e le unita
- *      ESEMPIO: se l'utente inserisce 1 e 5 -> sarebbe come 15!
- * Abbiamo anche disabilitato che si blocchi lo schermo così l'algoritmo non verrà stoppato dal metodo onPause
- * Abbiamo anche settato che l'unico orientamento disponibile è il portrait
- * Nel metodo onPause viene stoppato sempre l'algoritmo se sta eseguendo così da mantenere una certa consistenza
- * dei tempi generati
+/*
+  Classe Principale in cui verranno eseguiti gli algoritmi in AsyncTask
+  Qua gestiamo l'AsyncTask su cui si eseguono gli algoritmi in BackGround così da rendere l'nterfaccia
+  dell'utente in grado di rispondere ancora ai comandi e l'utente è abilitato per mezzo di un pulsante di
+  stop di fermare l'esecuzione dell'algoritmo.
+  Mentre l'algoritmo viene eseguito l'utente vedrà una progressBar e saranno disabilitati i pulsanti
+  go e plotta per evitare "incidenti"
+  Il risultato sarà il tempo di esecuzione per i due algoritmi in c e java in millisecondi
+  Facciamo anche un controllo sull'input che viene inserito dall'utente in modo da non causare crash
+  inattesi del programma.
+  Per l'algoritmo di Ackerman l'interfaccia è lievemente modificata in modo da far capire meglio come
+  funziona infatti prende due dati in input le decine e le unita
+       ESEMPIO: se l'utente inserisce 1 e 5 -> sarebbe come 15!
+  Abbiamo anche disabilitato che si blocchi lo schermo così l'algoritmo non verrà stoppato dal metodo onPause
+  Abbiamo anche settato che l'unico orientamento disponibile è il portrait
+  Nel metodo onPause viene stoppato sempre l'algoritmo se sta eseguendo così da mantenere una certa consistenza
+  dei tempi generati
  */
 
 import static javacpp.cmr.com.sdkvsndk.Algorithm.PRIMES;
