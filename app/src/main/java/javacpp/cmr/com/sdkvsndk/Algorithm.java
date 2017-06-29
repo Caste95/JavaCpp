@@ -181,7 +181,7 @@ class Algorithm {
         return (end - start);
     }
 
-
+    //verifica se un numero passato(n) è primo
     static long primalityTest(long n) {
         long s = System.currentTimeMillis();
 
@@ -206,6 +206,7 @@ class Algorithm {
         return e-s;
     }
 
+    //calcola tutti i numeri primi fino a r
     static long eratostene(long r) {
         long s = System.currentTimeMillis();
 
@@ -228,7 +229,7 @@ class Algorithm {
         return e-s;
     }
 
-
+    //concatena stringhe
     static long strcat(int n){
         long s = System.currentTimeMillis();
 
