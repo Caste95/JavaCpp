@@ -303,8 +303,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 7:
                     //chiamo l'algoritmo strcat
-                    res[0] = Algorithm.strcat(params[0]);
-                    res[1] = strcat(params[0]);
+                    res[0] = Algorithm.strcat(params[0] * 1000);
+                    res[1] = strcat(params[0] * 1000);
                     break;
                 default:
                     //algoritmo presente in lista ma non implementato
@@ -336,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
             ris2.setText(getString(R.string.resc) + " " + Long.toString(tc) + " " + getString(R.string.unita));
 
             //adesso dovro aggiornare il db
+            //N.B.:x rimane il numero inserito dall'utente e NON quello passato all'algoritmo
             AlgorithmView.LIST[pos].updateDB(MainActivity.this, x, tc, tj);
         }
 
