@@ -1,20 +1,20 @@
 package javacpp.cmr.com.sdkvsndk;
 
-/**
- * Activity che mi crea il grafico dei tempi degli algoritmi
- * Usiamo come libreria per il grafico: Graph View
- * Sito con tutta la docomentazione: http://www.android-graphview.org/
- * Obbiettivo di questa activity è di plottare i tempi di java e c dei vari algoritmi
- * L'asse delle y sarà il tempo in millisecondi
- * L'asse delle x sarà gli input che sono stati dati agli algoritmi
- * Per quanto riguarda gli stessi input sarà fatta la media
- * Inoltre se l'utente vuole vedere tutti i dati per gli stessi input il grafico è "toccabile"
- * e verranno stampati tutti i dati su delle TextBox
- * Il grafico è stato reso scrollabile e zoomabile per essere più leggibile
- * I dati che usa il grafico sono delle Series e come punti dei DataPoint
- * Una Series quindi e un insieme di DataPoint
- * Questi dati sono presi dal db e le Series sono direttamente generate nella classe AlgorithmView
- * Una per i tempi del c e una per i tempi del java
+/*
+  Activity che mi crea il grafico dei tempi degli algoritmi
+  Usiamo come libreria per il grafico: Graph View
+  Sito con tutta la docomentazione: http://www.android-graphview.org/
+  Obbiettivo di questa activity è di plottare i tempi di java e c dei vari algoritmi
+  L'asse delle y sarà il tempo in millisecondi
+  L'asse delle x sarà gli input che sono stati dati agli algoritmi
+  Per quanto riguarda gli stessi input sarà fatta la media
+  Inoltre se l'utente vuole vedere tutti i dati per gli stessi input il grafico è "toccabile"
+  e verranno stampati tutti i dati su delle TextBox
+  Il grafico è stato reso scrollabile e zoomabile per essere più leggibile
+  I dati che usa il grafico sono delle Series e come punti dei DataPoint
+  Una Series quindi e un insieme di DataPoint
+  Questi dati sono presi dal db e le Series sono direttamente generate nella classe AlgorithmView
+  Una per i tempi del c e una per i tempi del java
  */
 
 import android.graphics.Color;
