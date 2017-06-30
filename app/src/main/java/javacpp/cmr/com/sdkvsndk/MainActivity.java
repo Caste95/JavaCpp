@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                             //fibonacci: non da problemi di crash applicativi
                             break;
                         case 1:
+                            //calcMatr
                             if (x > 1000)
                                 throw new Exception();
                             break;
