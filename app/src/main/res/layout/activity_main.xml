@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.4"
-        android:text="@string/ackd"
+        android:text="@string/descalg"
         android:padding="10dp"
         android:textSize="20sp"
         android:gravity="left|center"/>
