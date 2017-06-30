@@ -18,7 +18,7 @@
     <string name="casd">Genera un array di numeri casuali di dimensione n moltiplicato per 10^6</string>
     <string name="matd">Crea e moltiplica tra di loro due matrici quadrate di ordine n</string>
     <string name="primd">Verifica che un numero prefissato di n cifre sia primo.\nInput: n &gt; 0 &amp; n &lt; 20</string>
-    <string name="ackd">Descrizione algoritmo Acker</string>
+    <string name="ackd">A[m, n] = n + 1 se m = 0\nA[m, n] = A[m - 1,1] se m > 0 e n = 0\nA[m, n] = A[m - 1, A[m, n - 1]] se m, n > 0\nInserire m compreso tra 0 e 4 inclusi e\nn compreso tra 0 e 9 inclusi</string>
     <string name="loopd">Esegue sei cicli for annidati da 0 a n</string>
     <string name="arad">Calcola tutti i numeri primi tra 2 e 10^n.\nInput: un intero n &lt; 9.</string>
     <string name="strcatd">Concatena n*1000 stringhe formate da un carattere.\nInput: un intero n qualsialsi.</string>
