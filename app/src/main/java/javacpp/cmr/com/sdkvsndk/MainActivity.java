@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                                 throw new Exception();
                             break;
                         case 7:
+                            //Concatenazione di stringhe
                             break;
                         default:
                             //algoritmo presente in lista ma non implementato
