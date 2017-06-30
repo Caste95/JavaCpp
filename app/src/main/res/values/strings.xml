@@ -15,10 +15,10 @@
     <string name="era">Crivello di Eratostene</string>
     <string name="strcat">Strcat</string>
     <string name="fibd">F[n] = 0 se n = 0\nF[n] = 1 se n = 1\nF[n] = F[n-1] + F[n-2] altrimenti\nInserire un numero n non troppo alto</string>
-    <string name="casd">Genera n (input dell\'utente) multiplicato per 10^6 \nnumeri casuali usando l\'algoritmo "linear congruential generator".\nNon dovrebbe dare problemi di crash applicativo\n </string>
+    <string name="casd">Genera n (input dell\'utente) multiplicato per 10^6 numeri casuali usando l\'algoritmo "linear congruential generator".\nNon dovrebbe dare problemi di crash applicativo\n </string>
     <string name="matd">Crea e moltiplica tra di loro due matrici quadrate di ordine n (input dell\'utente) \nAbbiamo messo come limite massimo 1000 anche se non dovrebbe dare problemi di crash.\n</string>
     <string name="primd">Verifica che un numero prefissato di n cifre sia primo.\nInput: n &gt; 0 &amp; n &lt; 20</string>
-    <string name="ackd">A[m, n] = n + 1 se m = 0\nA[m, n] = A[m - 1,1] se m > 0 e n = 0\nA[m, n] = A[m - 1, A[m, n - 1]] se m, n > 0\nInput: m &gt;= 0 &amp; m &lt;= 4; n &gt;= 0 &amp; n &lt;= 9</string>
+    <string name="ackd">A[m, n] = n + 1 se m = 0\nA[m, n] = A[m - 1,1] se m > 0 e n = 0\nA[m, n] = A[m - 1, A[m, n - 1]] se m, n > 0\nInput: m &gt;= 0 &amp; m &lt;= 4; n &gt;= 0 &amp; n &lt;= 9\nSe m = 4 è tollerato solo n = 0</string>
     <string name="loopd">Esegue sei cicli for annidati da 0 a n. \nCon n input dell\'utente.\nNon ci sono limiti di input.\n</string>
     <string name="arad">Calcola tutti i numeri primi tra 2 e 10^n.\nInput: un intero n &lt; 9.</string>
     <string name="strcatd">Concatena n * 1000 stringhe formate da un carattere.\nInput: un intero n qualsialsi.</string>
