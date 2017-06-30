@@ -137,14 +137,14 @@ class Algorithm {
         long start, end;            //per il tempo
         //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
         start = System.currentTimeMillis(); //primo tempo
-        int[][] fatt1 = new int[n][n];
-        int[][] fatt2 = new int[n][n];
-        int[][] ris = new int[n][n];
+        double[][] fatt1 = new double[n][n];
+        double[][] fatt2 = new double[n][n];
+        double[][] ris = new double[n][n];
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 if (flag) return -1;
-                fatt1[i][j] = (int)(Math.random()*100);
-                fatt2[i][j] = (int)(Math.random()*100);
+                fatt1[i][j] = (Math.random()*100);
+                fatt2[i][j] = (Math.random()*100);
             }
         }
         for (j = 0; j < n; j++) {

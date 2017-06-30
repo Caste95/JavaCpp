@@ -119,27 +119,27 @@ extern "C" {
         timeval start, stop;
         long long t;
         int i, j, l;
-        int **mat1;
-        int **mat2;
-        int **ris;
-        //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo protebbe essere differente
+        double **mat1;
+        double **mat2;
+        double **ris;
+        //qui prendiamo anche l'inizializzazzione delle matrici visto che anche questo potrebbe essere differente
         gettimeofday(&start, NULL);
         //usiamo la malloc perche con l'inizializzazzione classica android fa un po' di casino con la dimensione
         //delle variabili e quindi non alloca tutta la matrice
-        mat1 = (int**) malloc(n * sizeof(int));
-        mat2 = (int**) malloc(n * sizeof(int));
-        ris = (int**) malloc(n * sizeof(int));
+        mat1 = (double**) malloc(n * sizeof(double));
+        mat2 = (double**) malloc(n * sizeof(double));
+        ris = (double**) malloc(n * sizeof(double));
         for(i = 0; i < n; i++){
-            mat1 [i] = ( int *) malloc ( n * sizeof ( int ));
-            mat2 [i] = ( int *) malloc ( n * sizeof ( int ));
-            ris [i] = ( int *) malloc ( n * sizeof ( int ));
+            mat1 [i] = ( double *) malloc ( n * sizeof ( double ));
+            mat2 [i] = ( double *) malloc ( n * sizeof ( double ));
+            ris [i] = ( double *) malloc ( n * sizeof ( double ));
         }
         srand((unsigned int) time(NULL));
         for (i = 0; i < (long)n; i++) {
             for (j = 0; j < (long)n; j++) {
                 if(flag) return -1;
-                mat1[i][j] = (rand() % 100);
-                mat2[i][j] = (rand() % 100);
+                mat1[i][j] = (rand()/RAND_MAX * 100);
+                mat2[i][j] = (rand()/RAND_MAX * 100);
             }
         }
         for (j = 0; j < (long)n; j++) {

@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
             prBar.setLayoutParams(param);
         }
 
-        //TODO: Chiedere al tutor perchè la progress bar rimane visibile
-        prBar.setVisibility(View.INVISIBLE);
         stop.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
