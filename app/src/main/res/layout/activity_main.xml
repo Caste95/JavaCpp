@@ -22,7 +22,7 @@
         android:text="@string/descalg"
         android:padding="5dp"
         android:textSize="20sp"
-        android:gravity="left|center"/>
+        android:gravity="start|center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
