@@ -21,7 +21,7 @@
     <string name="ackd">Descrizione algoritmo Ackermann</string>
     <string name="loopd">Esegue sei cicli for annidati da 0 a n</string>
     <string name="arad">Calcola tutti i numeri primi tra 2 e 10^n.\nInput: un intero n &lt; 9.</string>
-    <string name="strcatd">Concatena 10^n stringhe formate da un carattere.\nInput: un intero n qualsialsi.</string>
+    <string name="strcatd">Concatena n*1000 stringhe formate da un carattere.\nInput: un intero n qualsialsi.</string>
     <string name="resjava">Algoritmo Java: </string>
     <string name="resc">Algoritmo C: </string>
     <string name="unita">(ms)</string>
