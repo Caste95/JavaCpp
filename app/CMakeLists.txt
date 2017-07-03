@@ -8,7 +8,6 @@ cmake_minimum_required(VERSION 3.4.1)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-O3 -DANDROID_ABI=armeabi-v7a")
 
-
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
