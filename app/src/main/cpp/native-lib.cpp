@@ -234,7 +234,7 @@ extern "C" {
          * and adding #include <android/log.h>
         */
     /*
-        if (prime) { //TODO il debugger mi mostra r negativo ma logcat me lo stampa correttamente
+        if (prime) {
             __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is prime", (unsigned long long) r);
         } else {
             __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is not prime", (unsigned long long)r);

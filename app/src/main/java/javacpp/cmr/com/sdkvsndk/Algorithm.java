@@ -15,7 +15,6 @@ package javacpp.cmr.com.sdkvsndk;
 
 class Algorithm {
 
-    //TODO: chiedere al tutor se è il caso di mettere l'array in strings.xml
     //variabile contenente i numeri primi per l'algoritmo primalitytest
     static final long[] PRIMES = {
             7,
