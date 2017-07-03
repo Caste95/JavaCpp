@@ -1,4 +1,4 @@
-package javacpp.cmr.com.sdkvsndk;
+package javacpp.cmr.com.sdkvsndk; //TODO nome del package invertito?
 
 /*
   Classe Principale in cui verranno eseguiti gli algoritmi in AsyncTask
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //TODO: Chiedere al tutor perchè la progress bar rimane visibile
-        prBar.setVisibility(View.INVISIBLE);
+        //prBar.setVisibility(View.INVISIBLE);
         stop.setVisibility(View.INVISIBLE);
         go.setOnClickListener(new View.OnClickListener() {
             @Override

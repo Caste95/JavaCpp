@@ -224,7 +224,7 @@ extern "C" {
         //il compilatore non riesce a ottimizzare il codice, allora lo faccio io
         // veniva calcolata la sqrt ad ogni iterazione che è un overhead MICIDIALE
         unsigned long long sr = (unsigned long long) sqrt(r);
-        for (long long i = 2; i < sr && prime; i++) {
+        for (long long i = 2; i <   sr && prime; i++) {
             if (flag) return -1;
             if (r % i == 0) prime = false;
         }
