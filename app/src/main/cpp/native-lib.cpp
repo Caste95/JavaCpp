@@ -2,6 +2,7 @@
 #include <string>
 #include <stdlib.h>
 #include <cmath>
+//#include <android/log.h>
 
 /**
  * Libreria che contiene tutti gli algoritmi scritti in c su cui svolgiamo i test in questo programma
@@ -233,17 +234,20 @@ extern "C" {
          * You can verify the correctness of the algorithm by uncomment the code below
          * and adding #include <android/log.h>
         */
-    /*
-        if (prime) {
-            __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is prime", (unsigned long long) r);
-        } else {
-            __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is not prime", (unsigned long long)r);
-        }
-    */
+
+
+
 
         gettimeofday(&stop, NULL);
         t = (stop.tv_sec - start.tv_sec) * 1000;
         t += (long long) ((stop.tv_usec - start.tv_usec) / 1000);
+/*
+        if (prime) {
+            __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is prime; time: %lld", (unsigned long long) r, t);
+        } else {
+            __android_log_print(ANDROID_LOG_INFO, "C++ PrimalityTest", "%llu is not prime; time: %lld", (unsigned long long)r, t);
+        }
+*/
         return (jlong) t;
     }
 
